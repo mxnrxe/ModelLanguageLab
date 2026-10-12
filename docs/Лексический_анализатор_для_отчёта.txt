@@ -1,0 +1,985 @@
+﻿"""Самодостаточный листинг текущего анализатора. Без интерфейса."""
+
+"""Результаты анализа, общие для интерфейса и следующих этапов."""
+from dataclasses import dataclass, field
+from fractions import Fraction
+
+
+@dataclass(frozen=True)
+class Token:
+    table: int
+    index: int
+    text: str
+    start: int
+    end: int
+    line: int
+    column: int
+    kind: str = ""
+
+    @property
+    def pair(self) -> str:
+        return f"({self.table}, {self.index})"
+
+
+@dataclass
+class NumberEntry:
+    value: Fraction
+    spellings: list[str] = field(default_factory=list)
+    kinds: list[str] = field(default_factory=list)
+
+
+@dataclass(frozen=True)
+class Diagnostic:
+    message: str
+    start: int
+    end: int
+    line: int
+    column: int
+    state: str
+    edge: str
+
+
+@dataclass(frozen=True)
+class TraceStep:
+    edge: str
+    source: str
+    target: str
+    character: str
+    line: int
+    column: int
+    actions: str
+
+
+@dataclass
+class AnalysisResult:
+    source: str
+    tokens: list[Token] = field(default_factory=list)
+    identifiers: list[str] = field(default_factory=list)
+    numbers: list[NumberEntry] = field(default_factory=list)
+    diagnostics: list[Diagnostic] = field(default_factory=list)
+    trace: list[TraceStep] = field(default_factory=list)
+    trace_truncated: bool = False
+
+    @property
+    def ok(self) -> bool:
+        return not self.diagnostics
+
+    @property
+    def chain(self) -> str:
+        return " ".join(t.pair for t in self.tokens)
+
+"""Нумерация таблиц и элементов начинается с единицы."""
+
+TW = (('dim', 'Описание переменных'),
+ ('end', 'Завершение программы'),
+ ('if', 'Условный оператор'),
+ ('else', 'Альтернативная ветвь'),
+ ('for', 'Цикл с параметром'),
+ ('to', 'Граница изменения параметра'),
+ ('step', 'Шаг изменения параметра'),
+ ('next', 'Завершение цикла с параметром'),
+ ('while', 'Цикл с предусловием'),
+ ('readln', 'Ввод'),
+ ('writeln', 'Вывод'),
+ ('true', 'Логическая константа истина'),
+ ('false', 'Логическая константа ложь'),
+ ('or', 'Логическое сложение'),
+ ('and', 'Логическое умножение'))
+
+TL = (('<>', 'Не равно'),
+ ('=', 'Равно'),
+ ('<', 'Меньше'),
+ ('<=', 'Меньше или равно'),
+ ('>', 'Больше'),
+ ('>=', 'Больше или равно'),
+ ('+', 'Сложение'),
+ ('-', 'Вычитание'),
+ ('*', 'Умножение'),
+ ('/', 'Деление'),
+ (',', 'Разделитель элементов списка'),
+ (':', 'Разделитель конструкций'),
+ (':=', 'Присваивание'),
+ ('(', 'Открывающая круглая скобка'),
+ (')', 'Закрывающая круглая скобка'),
+ ('[', 'Начало составного оператора'),
+ (']', 'Конец составного оператора'),
+ ('%', 'Признак целого типа'),
+ ('!', 'Признак действительного типа или логическое отрицание'),
+ ('$', 'Признак логического типа'),
+ ('NL', 'Логический перевод строки'))
+
+"""Преобразование B внутри put(TN), ПОСЛЕ распознавания автоматом.
+
+Никаких regex, float или готовых конвертеров систем счисления.
+Fraction хранит точное значение, чтобы 1B, 01 и 1.0 имели один индекс.
+"""
+from fractions import Fraction
+
+DIGITS = "0123456789abcdef"
+MAX_DECIMAL_POWER = 10000
+
+
+class NumericLimitError(ValueError):
+    """Ограничение ресурсов реализации, не ошибка грамматики числа."""
+
+
+def accumulate(text: str, base: int) -> int:
+    value = 0
+    for ch in text.lower():
+        digit = DIGITS.index(ch)
+        if digit >= base:
+            raise ValueError("Цифра не принадлежит системе счисления")
+        value = base * value + digit
+    return value
+
+
+def convert_number(buffer: str, kind: str) -> Fraction:
+    if kind != "REAL":
+        base = {"BIN": 2, "OCT": 8, "DEC": 10, "DEC_D": 10, "HEX": 16}[kind]
+        digits = buffer if kind == "DEC" else buffer[:-1]
+        return Fraction(accumulate(digits, base))
+    text = buffer.lower()
+    mantissa, separator, exponent = text.partition("e")
+    power = 0
+    if separator:
+        sign = -1 if exponent.startswith("-") else 1
+        exponent = exponent.lstrip("+-")
+        # Ограничение проверяется до построения огромного целого порядка.
+        significant = exponent.lstrip("0") or "0"
+        if len(significant) > 5:
+            raise NumericLimitError("Порядок превышает предел реализации 10000")
+        power = sign * accumulate(significant, 10)
+    integer, dot, fractional = mantissa.partition(".")
+    power -= len(fractional) if dot else 0
+    if abs(power) > MAX_DECIMAL_POWER:
+        raise NumericLimitError("Десятичный масштаб превышает предел реализации 10000")
+    value = accumulate(integer + fractional, 10)
+    return Fraction(value * 10 ** power) if power >= 0 else Fraction(value, 10 ** (-power))
+
+
+def display_value(value: Fraction) -> str:
+    """Читаемое точное значение; у нашего языка дроби всегда конечные."""
+    if value.denominator == 1:
+        return str(value.numerator)
+    denominator = value.denominator
+    twos = fives = 0
+    while denominator % 2 == 0:
+        denominator //= 2
+        twos += 1
+    while denominator % 5 == 0:
+        denominator //= 5
+        fives += 1
+    if denominator != 1:
+        return str(value)
+    scale = max(twos, fives)
+    if scale > 60:
+        return str(value)
+    digits = str(value.numerator * 2 ** (scale - twos) * 5 ** (scale - fives)).zfill(scale + 1)
+    return digits[:-scale] + "." + digits[-scale:]
+
+"""Лексический автомат итоговой схемы: явные if/elif, без таблицы исполнения.
+
+START — начальная дуга; KW/OP — ромбы z != 0; V/ER — завершение.
+B — строка символов числа. Перевод в значение выполняет put(4, kind).
+"""
+
+EOF = "EOF"
+BOUNDARY = set(" \t\n+-*/()[],:%!$<>=}{") | {EOF}
+
+
+def let(ch: str) -> bool:
+    return len(ch) == 1 and ("a" <= ch <= "z" or "A" <= ch <= "Z")
+
+
+def digit(ch: str) -> bool:
+    return len(ch) == 1 and "0" <= ch <= "9"
+
+
+class Lexer:
+    def analyze(self, source: str, *, trace: bool = True) -> AnalysisResult:
+        self._reset(source, trace)
+        while self.CS not in ("V", "ER"):
+            try:
+                self.scanner()
+            except NumericLimitError as error:
+                self._error(str(error), self.last_edge)
+                self.CS = "ER"
+        return self.result
+
+    def _reset(self, source: str, trace: bool) -> None:
+        self.result = AnalysisResult(source.replace("\r\n", "\n").replace("\r", "\n"))
+        self.text = self.result.source
+        self.CS, self.CH, self.S, self.B, self.z = "START", EOF, "", "", 0
+        self.pos = -1
+        self.start = 0
+        self.line = self.column = 1
+        self.start_line = self.start_column = 1
+        self._ti, self._tn = {}, {}
+        self._word_table = {s: i for i, (s, _) in enumerate(TW, 1)}
+        self._delimiter_table = {"\n" if s == "NL" else s: i for i, (s, _) in enumerate(TL, 1)}
+        self._trace_enabled = trace
+        self.last_edge = ""
+
+    def _record(self, edge_id: str, target: str, actions: str) -> None:
+        """Запоминает начало лексемы и журнал; CH, CS, S, B и z не меняет."""
+        self.last_edge = edge_id
+        if self.CS == "H" and target != "H":
+            self.start, self.start_line, self.start_column = self.pos, self.line, self.column
+        if self._trace_enabled:
+            if len(self.result.trace) < 100000:
+                self.result.trace.append(TraceStep(edge_id, self.CS, target, self.CH,
+                    self.line, self.column, actions))
+            else:
+                self.result.trace_truncated = True
+
+    def scanner(self) -> None:
+        """Выполняет одну дугу схемы и действия входа в целевое состояние.
+
+        Повторные кружки на рисунке имеют одно имя и одну ветвь if/elif.
+        _record нужен только для координат лексем и журнала переходов.
+        """
+        if self.CS == 'START':
+            # M01: START -> H
+            self._record('M01', 'H', 'gc')
+            self.gc()
+            self.CS = 'H'
+
+        elif self.CS == 'H':
+            if self.CH != EOF and self.CH in ' \t':
+                # M02: H -> H
+                self._record('M02', 'H', 'gc')
+                self.gc()
+                self.CS = 'H'
+            elif let(self.CH):
+                # M03: H -> I
+                self._record('M03', 'I', 'nill, add, gc')
+                self.nill()
+                self.add()
+                self.gc()
+                self.CS = 'I'
+            elif self.CH != EOF and self.CH in '01':
+                # M04: H -> N2
+                self._record('M04', 'N2', 'B_start, gc')
+                self.B = self.CH
+                self.gc()
+                self.CS = 'N2'
+            elif self.CH != EOF and self.CH in '234567':
+                # M05: H -> N8
+                self._record('M05', 'N8', 'B_start, gc')
+                self.B = self.CH
+                self.gc()
+                self.CS = 'N8'
+            elif self.CH != EOF and self.CH in '89':
+                # M06: H -> N10
+                self._record('M06', 'N10', 'B_start, gc')
+                self.B = self.CH
+                self.gc()
+                self.CS = 'N10'
+            elif self.CH != EOF and self.CH in '.':
+                # M07: H -> T
+                self._record('M07', 'T', 'B_reset, B_append, gc')
+                self.B = ""
+                self.CS = 'T'
+                self.B += self.CH
+                self.gc()
+            elif self.CH != EOF and self.CH in '{':
+                # M08: H -> C
+                self._record('M08', 'C', 'gc')
+                self.gc()
+                self.CS = 'C'
+            elif self.CH != EOF and self.CH in ':':
+                # M09: H -> DV
+                self._record('M09', 'DV', 'gc')
+                self.gc()
+                self.CS = 'DV'
+            elif self.CH != EOF and self.CH in '<':
+                # M10: H -> CM
+                self._record('M10', 'CM', 'gc')
+                self.gc()
+                self.CS = 'CM'
+            elif self.CH != EOF and self.CH in '>':
+                # M11: H -> CB
+                self._record('M11', 'CB', 'gc')
+                self.gc()
+                self.CS = 'CB'
+            elif self.CH == EOF:
+                # M12: H -> V
+                self._record('M12', 'V', '')
+                self.CS = 'V'
+            else:
+                # M13: H -> OP
+                self._record('M13', 'OP', 'nill, add, look_TL')
+                self.nill()
+                self.add()
+                self.look(2)
+                self.CS = 'OP'
+
+        elif self.CS == 'I':
+            if let(self.CH) or digit(self.CH):
+                # M14: I -> I
+                self._record('M14', 'I', 'add, gc')
+                self.add()
+                self.gc()
+                self.CS = 'I'
+            else:
+                # M15: I -> KW
+                self._record('M15', 'KW', 'look_TW')
+                self.look(1)
+                self.CS = 'KW'
+
+        elif self.CS == 'KW':
+            if self.z != 0:
+                # M16: KW -> H
+                self._record('M16', 'H', 'out:1')
+                self.out(1, self.z)
+                self.CS = 'H'
+            else:
+                # M17: KW -> H
+                self._record('M17', 'H', 'put_TI, out:3')
+                self.put(3)
+                self.out(3, self.z)
+                self.CS = 'H'
+
+        elif self.CS == 'N2':
+            if self.CH != EOF and self.CH in '01':
+                # R001: N2 -> N2
+                self._record('R001', 'N2', 'B_append, gc')
+                self.B += self.CH
+                self.gc()
+                self.CS = 'N2'
+            elif self.CH != EOF and self.CH in '234567':
+                # R002: N2 -> N8
+                self._record('R002', 'N8', '')
+                self.CS = 'N8'
+            elif self.CH != EOF and self.CH in '89':
+                # R003: N2 -> N10
+                self._record('R003', 'N10', '')
+                self.CS = 'N10'
+            elif self.CH != EOF and self.CH in 'Bb':
+                # R004: N2 -> P2
+                self._record('R004', 'P2', 'B_append, gc')
+                self.CS = 'P2'
+                self.B += self.CH
+                self.gc()
+            elif self.CH != EOF and self.CH in 'Dd':
+                # R005: N2 -> U10
+                self._record('R005', 'U10', 'B_append, gc')
+                self.CS = 'U10'
+                self.B += self.CH
+                self.gc()
+            elif self.CH != EOF and self.CH in 'Ee':
+                # R006: N2 -> Exp
+                self._record('R006', 'Exp', 'B_append, gc')
+                self.CS = 'Exp'
+                self.B += self.CH
+                self.gc()
+            elif self.CH != EOF and self.CH in 'ACFacf':
+                # R007: N2 -> N16
+                self._record('R007', 'N16', '')
+                self.CS = 'N16'
+            elif self.CH != EOF and self.CH in 'Oo':
+                # R008: N2 -> P8
+                self._record('R008', 'P8', 'B_append, gc')
+                self.CS = 'P8'
+                self.B += self.CH
+                self.gc()
+            elif self.CH != EOF and self.CH in 'Hh':
+                # R009: N2 -> P16
+                self._record('R009', 'P16', 'B_append, gc')
+                self.CS = 'P16'
+                self.B += self.CH
+                self.gc()
+            elif self.CH != EOF and self.CH in '.':
+                # R010: N2 -> T
+                self._record('R010', 'T', 'B_append, gc')
+                self.CS = 'T'
+                self.B += self.CH
+                self.gc()
+            elif self.CH in BOUNDARY:
+                # R011: N2 -> H
+                self._record('R011', 'H', 'number:DEC')
+                self.put(4, 'DEC')
+                self.out(4, self.z, 'DEC')
+                self.CS = 'H'
+            else:
+                # R012: N2 -> ER
+                self._record('R012', 'ER', 'error:NUM_FORM')
+                self._error('Некорректная или незавершённая запись числа', 'R012')
+                self.CS = 'ER'
+
+        elif self.CS == 'P2':
+            if self.CH != EOF and self.CH in '0123456789ABCDEFabcdef':
+                # R031: P2 -> N16
+                self._record('R031', 'N16', '')
+                self.CS = 'N16'
+            elif self.CH != EOF and self.CH in 'Hh':
+                # R032: P2 -> P16
+                self._record('R032', 'P16', 'B_append, gc')
+                self.CS = 'P16'
+                self.B += self.CH
+                self.gc()
+            elif self.CH in BOUNDARY:
+                # R033: P2 -> H
+                self._record('R033', 'H', 'number:BIN')
+                self.put(4, 'BIN')
+                self.out(4, self.z, 'BIN')
+                self.CS = 'H'
+            else:
+                # R034: P2 -> ER
+                self._record('R034', 'ER', 'error:NUM_FORM')
+                self._error('Некорректная или незавершённая запись числа', 'R034')
+                self.CS = 'ER'
+
+        elif self.CS == 'N16':
+            if self.CH != EOF and self.CH in '0123456789ABCDEFabcdef':
+                # R039: N16 -> N16
+                self._record('R039', 'N16', 'B_append, gc')
+                self.B += self.CH
+                self.gc()
+                self.CS = 'N16'
+            elif self.CH != EOF and self.CH in 'Hh':
+                # R040: N16 -> P16
+                self._record('R040', 'P16', 'B_append, gc')
+                self.CS = 'P16'
+                self.B += self.CH
+                self.gc()
+            elif self.CH in BOUNDARY:
+                # R041: N16 -> ER
+                self._record('R041', 'ER', 'error:NUM_INCOMPLETE')
+                self._error('Некорректная или незавершённая запись числа', 'R041')
+                self.CS = 'ER'
+            else:
+                # R042: N16 -> ER
+                self._record('R042', 'ER', 'error:NUM_FORM')
+                self._error('Некорректная или незавершённая запись числа', 'R042')
+                self.CS = 'ER'
+
+        elif self.CS == 'P16':
+            if self.CH in BOUNDARY:
+                # R045: P16 -> H
+                self._record('R045', 'H', 'number:HEX')
+                self.put(4, 'HEX')
+                self.out(4, self.z, 'HEX')
+                self.CS = 'H'
+            else:
+                # R046: P16 -> ER
+                self._record('R046', 'ER', 'error:NUM_FORM')
+                self._error('Некорректная или незавершённая запись числа', 'R046')
+                self.CS = 'ER'
+
+        elif self.CS == 'N8':
+            if self.CH != EOF and self.CH in '01234567':
+                # R013: N8 -> N8
+                self._record('R013', 'N8', 'B_append, gc')
+                self.B += self.CH
+                self.gc()
+                self.CS = 'N8'
+            elif self.CH != EOF and self.CH in '89':
+                # R014: N8 -> N10
+                self._record('R014', 'N10', '')
+                self.CS = 'N10'
+            elif self.CH != EOF and self.CH in 'ABCFabcf':
+                # R015: N8 -> N16
+                self._record('R015', 'N16', '')
+                self.CS = 'N16'
+            elif self.CH != EOF and self.CH in 'Dd':
+                # R016: N8 -> U10
+                self._record('R016', 'U10', 'B_append, gc')
+                self.CS = 'U10'
+                self.B += self.CH
+                self.gc()
+            elif self.CH != EOF and self.CH in 'Ee':
+                # R017: N8 -> Exp
+                self._record('R017', 'Exp', 'B_append, gc')
+                self.CS = 'Exp'
+                self.B += self.CH
+                self.gc()
+            elif self.CH != EOF and self.CH in 'Oo':
+                # R018: N8 -> P8
+                self._record('R018', 'P8', 'B_append, gc')
+                self.CS = 'P8'
+                self.B += self.CH
+                self.gc()
+            elif self.CH != EOF and self.CH in 'Hh':
+                # R019: N8 -> P16
+                self._record('R019', 'P16', 'B_append, gc')
+                self.CS = 'P16'
+                self.B += self.CH
+                self.gc()
+            elif self.CH != EOF and self.CH in '.':
+                # R020: N8 -> T
+                self._record('R020', 'T', 'B_append, gc')
+                self.CS = 'T'
+                self.B += self.CH
+                self.gc()
+            elif self.CH in BOUNDARY:
+                # R021: N8 -> H
+                self._record('R021', 'H', 'number:DEC')
+                self.put(4, 'DEC')
+                self.out(4, self.z, 'DEC')
+                self.CS = 'H'
+            else:
+                # R022: N8 -> ER
+                self._record('R022', 'ER', 'error:NUM_FORM')
+                self._error('Некорректная или незавершённая запись числа', 'R022')
+                self.CS = 'ER'
+
+        elif self.CS == 'N10':
+            if self.CH != EOF and self.CH in '0123456789':
+                # R023: N10 -> N10
+                self._record('R023', 'N10', 'B_append, gc')
+                self.B += self.CH
+                self.gc()
+                self.CS = 'N10'
+            elif self.CH != EOF and self.CH in 'ABCFabcf':
+                # R024: N10 -> N16
+                self._record('R024', 'N16', '')
+                self.CS = 'N16'
+            elif self.CH != EOF and self.CH in 'Dd':
+                # R025: N10 -> U10
+                self._record('R025', 'U10', 'B_append, gc')
+                self.CS = 'U10'
+                self.B += self.CH
+                self.gc()
+            elif self.CH != EOF and self.CH in 'Ee':
+                # R026: N10 -> Exp
+                self._record('R026', 'Exp', 'B_append, gc')
+                self.CS = 'Exp'
+                self.B += self.CH
+                self.gc()
+            elif self.CH != EOF and self.CH in 'Hh':
+                # R027: N10 -> P16
+                self._record('R027', 'P16', 'B_append, gc')
+                self.CS = 'P16'
+                self.B += self.CH
+                self.gc()
+            elif self.CH != EOF and self.CH in '.':
+                # R028: N10 -> T
+                self._record('R028', 'T', 'B_append, gc')
+                self.CS = 'T'
+                self.B += self.CH
+                self.gc()
+            elif self.CH in BOUNDARY:
+                # R029: N10 -> H
+                self._record('R029', 'H', 'number:DEC')
+                self.put(4, 'DEC')
+                self.out(4, self.z, 'DEC')
+                self.CS = 'H'
+            else:
+                # R030: N10 -> ER
+                self._record('R030', 'ER', 'error:NUM_FORM')
+                self._error('Некорректная или незавершённая запись числа', 'R030')
+                self.CS = 'ER'
+
+        elif self.CS == 'U10':
+            if self.CH != EOF and self.CH in '0123456789ABCDEFabcdef':
+                # R035: U10 -> N16
+                self._record('R035', 'N16', '')
+                self.CS = 'N16'
+            elif self.CH != EOF and self.CH in 'Hh':
+                # R036: U10 -> P16
+                self._record('R036', 'P16', 'B_append, gc')
+                self.CS = 'P16'
+                self.B += self.CH
+                self.gc()
+            elif self.CH in BOUNDARY:
+                # R037: U10 -> H
+                self._record('R037', 'H', 'number:DEC_D')
+                self.put(4, 'DEC_D')
+                self.out(4, self.z, 'DEC_D')
+                self.CS = 'H'
+            else:
+                # R038: U10 -> ER
+                self._record('R038', 'ER', 'error:NUM_FORM')
+                self._error('Некорректная или незавершённая запись числа', 'R038')
+                self.CS = 'ER'
+
+        elif self.CS == 'P8':
+            if self.CH in BOUNDARY:
+                # R043: P8 -> H
+                self._record('R043', 'H', 'number:OCT')
+                self.put(4, 'OCT')
+                self.out(4, self.z, 'OCT')
+                self.CS = 'H'
+            else:
+                # R044: P8 -> ER
+                self._record('R044', 'ER', 'error:NUM_FORM')
+                self._error('Некорректная или незавершённая запись числа', 'R044')
+                self.CS = 'ER'
+
+        elif self.CS == 'Exp':
+            if self.CH != EOF and self.CH in '0123456789':
+                # R047: Exp -> PP
+                self._record('R047', 'PP', 'B_append, gc')
+                self.CS = 'PP'
+                self.B += self.CH
+                self.gc()
+            elif self.CH != EOF and self.CH in '+-':
+                # R048: Exp -> TT
+                self._record('R048', 'TT', 'B_append, gc')
+                self.CS = 'TT'
+                self.B += self.CH
+                self.gc()
+            elif self.CH != EOF and self.CH in 'ABCDEFabcdef':
+                # R049: Exp -> N16
+                self._record('R049', 'N16', '')
+                self.CS = 'N16'
+            elif self.CH != EOF and self.CH in 'Hh':
+                # R050: Exp -> P16
+                self._record('R050', 'P16', 'B_append, gc')
+                self.CS = 'P16'
+                self.B += self.CH
+                self.gc()
+            elif self.CH in BOUNDARY and self.CH not in '+-':
+                # R051: Exp -> ER
+                self._record('R051', 'ER', 'error:NUM_INCOMPLETE')
+                self._error('Некорректная или незавершённая запись числа', 'R051')
+                self.CS = 'ER'
+            else:
+                # R052: Exp -> ER
+                self._record('R052', 'ER', 'error:NUM_FORM')
+                self._error('Некорректная или незавершённая запись числа', 'R052')
+                self.CS = 'ER'
+
+        elif self.CS == 'TT':
+            if self.CH != EOF and self.CH in '0123456789':
+                # R058: TT -> Mn
+                self._record('R058', 'Mn', '')
+                self.CS = 'Mn'
+            elif self.CH in BOUNDARY:
+                # R059: TT -> ER
+                self._record('R059', 'ER', 'error:NUM_INCOMPLETE')
+                self._error('Некорректная или незавершённая запись числа', 'R059')
+                self.CS = 'ER'
+            else:
+                # R060: TT -> ER
+                self._record('R060', 'ER', 'error:NUM_FORM')
+                self._error('Некорректная или незавершённая запись числа', 'R060')
+                self.CS = 'ER'
+
+        elif self.CS == 'Mn':
+            if self.CH != EOF and self.CH in '0123456789':
+                # R072: Mn -> Mn
+                self._record('R072', 'Mn', 'B_append, gc')
+                self.B += self.CH
+                self.gc()
+                self.CS = 'Mn'
+            elif self.CH in BOUNDARY:
+                # R073: Mn -> H
+                self._record('R073', 'H', 'number:REAL')
+                self.put(4, 'REAL')
+                self.out(4, self.z, 'REAL')
+                self.CS = 'H'
+            else:
+                # R074: Mn -> ER
+                self._record('R074', 'ER', 'error:NUM_FORM')
+                self._error('Некорректная или незавершённая запись числа', 'R074')
+                self.CS = 'ER'
+
+        elif self.CS == 'T':
+            if self.CH != EOF and self.CH in '0123456789':
+                # R061: T -> E1
+                self._record('R061', 'E1', '')
+                self.CS = 'E1'
+            elif self.CH in BOUNDARY:
+                # R062: T -> ER
+                self._record('R062', 'ER', 'error:NUM_INCOMPLETE')
+                self._error('Некорректная или незавершённая запись числа', 'R062')
+                self.CS = 'ER'
+            else:
+                # R063: T -> ER
+                self._record('R063', 'ER', 'error:NUM_FORM')
+                self._error('Некорректная или незавершённая запись числа', 'R063')
+                self.CS = 'ER'
+
+        elif self.CS == 'E1':
+            if self.CH != EOF and self.CH in '0123456789':
+                # R064: E1 -> E1
+                self._record('R064', 'E1', 'B_append, gc')
+                self.B += self.CH
+                self.gc()
+                self.CS = 'E1'
+            elif self.CH != EOF and self.CH in 'Ee':
+                # R065: E1 -> EX
+                self._record('R065', 'EX', 'B_append, gc')
+                self.CS = 'EX'
+                self.B += self.CH
+                self.gc()
+            elif self.CH in BOUNDARY:
+                # R066: E1 -> H
+                self._record('R066', 'H', 'number:REAL')
+                self.put(4, 'REAL')
+                self.out(4, self.z, 'REAL')
+                self.CS = 'H'
+            else:
+                # R067: E1 -> ER
+                self._record('R067', 'ER', 'error:NUM_FORM')
+                self._error('Некорректная или незавершённая запись числа', 'R067')
+                self.CS = 'ER'
+
+        elif self.CS == 'EX':
+            if self.CH != EOF and self.CH in '0123456789':
+                # R068: EX -> E2
+                self._record('R068', 'E2', '')
+                self.CS = 'E2'
+            elif self.CH != EOF and self.CH in '+-':
+                # R069: EX -> E3
+                self._record('R069', 'E3', 'B_append, gc')
+                self.CS = 'E3'
+                self.B += self.CH
+                self.gc()
+            elif self.CH in BOUNDARY and self.CH not in '+-':
+                # R070: EX -> ER
+                self._record('R070', 'ER', 'error:NUM_INCOMPLETE')
+                self._error('Некорректная или незавершённая запись числа', 'R070')
+                self.CS = 'ER'
+            else:
+                # R071: EX -> ER
+                self._record('R071', 'ER', 'error:NUM_FORM')
+                self._error('Некорректная или незавершённая запись числа', 'R071')
+                self.CS = 'ER'
+
+        elif self.CS == 'E2':
+            if self.CH != EOF and self.CH in '0123456789':
+                # R080: E2 -> E2
+                self._record('R080', 'E2', 'B_append, gc')
+                self.B += self.CH
+                self.gc()
+                self.CS = 'E2'
+            elif self.CH in BOUNDARY:
+                # R081: E2 -> H
+                self._record('R081', 'H', 'number:REAL')
+                self.put(4, 'REAL')
+                self.out(4, self.z, 'REAL')
+                self.CS = 'H'
+            else:
+                # R082: E2 -> ER
+                self._record('R082', 'ER', 'error:NUM_FORM')
+                self._error('Некорректная или незавершённая запись числа', 'R082')
+                self.CS = 'ER'
+
+        elif self.CS == 'E3':
+            if self.CH != EOF and self.CH in '0123456789':
+                # R083: E3 -> E4
+                self._record('R083', 'E4', '')
+                self.CS = 'E4'
+            elif self.CH in BOUNDARY:
+                # R084: E3 -> ER
+                self._record('R084', 'ER', 'error:NUM_INCOMPLETE')
+                self._error('Некорректная или незавершённая запись числа', 'R084')
+                self.CS = 'ER'
+            else:
+                # R085: E3 -> ER
+                self._record('R085', 'ER', 'error:NUM_FORM')
+                self._error('Некорректная или незавершённая запись числа', 'R085')
+                self.CS = 'ER'
+
+        elif self.CS == 'E4':
+            if self.CH != EOF and self.CH in '0123456789':
+                # R086: E4 -> E4
+                self._record('R086', 'E4', 'B_append, gc')
+                self.B += self.CH
+                self.gc()
+                self.CS = 'E4'
+            elif self.CH in BOUNDARY:
+                # R087: E4 -> H
+                self._record('R087', 'H', 'number:REAL')
+                self.put(4, 'REAL')
+                self.out(4, self.z, 'REAL')
+                self.CS = 'H'
+            else:
+                # R088: E4 -> ER
+                self._record('R088', 'ER', 'error:NUM_FORM')
+                self._error('Некорректная или незавершённая запись числа', 'R088')
+                self.CS = 'ER'
+
+        elif self.CS == 'PP':
+            if self.CH != EOF and self.CH in '0123456789':
+                # R075: PP -> NK
+                self._record('R075', 'NK', '')
+                self.CS = 'NK'
+            elif self.CH != EOF and self.CH in 'ABCDEFabcdef':
+                # R076: PP -> N16
+                self._record('R076', 'N16', '')
+                self.CS = 'N16'
+            elif self.CH != EOF and self.CH in 'Hh':
+                # R077: PP -> P16
+                self._record('R077', 'P16', 'B_append, gc')
+                self.CS = 'P16'
+                self.B += self.CH
+                self.gc()
+            elif self.CH in BOUNDARY:
+                # R078: PP -> H
+                self._record('R078', 'H', 'number:REAL')
+                self.put(4, 'REAL')
+                self.out(4, self.z, 'REAL')
+                self.CS = 'H'
+            else:
+                # R079: PP -> ER
+                self._record('R079', 'ER', 'error:NUM_FORM')
+                self._error('Некорректная или незавершённая запись числа', 'R079')
+                self.CS = 'ER'
+
+        elif self.CS == 'NK':
+            if self.CH != EOF and self.CH in '0123456789':
+                # R053: NK -> NK
+                self._record('R053', 'NK', 'B_append, gc')
+                self.B += self.CH
+                self.gc()
+                self.CS = 'NK'
+            elif self.CH != EOF and self.CH in 'ABCDEFabcdef':
+                # R054: NK -> N16
+                self._record('R054', 'N16', '')
+                self.CS = 'N16'
+            elif self.CH != EOF and self.CH in 'Hh':
+                # R055: NK -> P16
+                self._record('R055', 'P16', 'B_append, gc')
+                self.CS = 'P16'
+                self.B += self.CH
+                self.gc()
+            elif self.CH in BOUNDARY:
+                # R056: NK -> H
+                self._record('R056', 'H', 'number:REAL')
+                self.put(4, 'REAL')
+                self.out(4, self.z, 'REAL')
+                self.CS = 'H'
+            else:
+                # R057: NK -> ER
+                self._record('R057', 'ER', 'error:NUM_FORM')
+                self._error('Некорректная или незавершённая запись числа', 'R057')
+                self.CS = 'ER'
+
+        elif self.CS == 'C':
+            if self.CH not in {'}'} and self.CH != EOF:
+                # M22: C -> C
+                self._record('M22', 'C', 'gc')
+                self.gc()
+                self.CS = 'C'
+            elif self.CH != EOF and self.CH in '}':
+                # M20: C -> H
+                self._record('M20', 'H', 'gc')
+                self.gc()
+                self.CS = 'H'
+            else:
+                # M21: C -> ER
+                self._record('M21', 'ER', 'error:COMMENT')
+                self._error('Незавершённый комментарий: ожидается }', 'M21')
+                self.CS = 'ER'
+
+        elif self.CS == 'DV':
+            if self.CH != EOF and self.CH in '=':
+                # M23: DV -> H
+                self._record('M23', 'H', 'gc, out:2:13')
+                self.gc()
+                self.out(2, 13)
+                self.CS = 'H'
+            else:
+                # M24: DV -> H
+                self._record('M24', 'H', 'out:2:12')
+                self.out(2, 12)
+                self.CS = 'H'
+
+        elif self.CS == 'CM':
+            if self.CH != EOF and self.CH in '=':
+                # M25: CM -> H
+                self._record('M25', 'H', 'gc, out:2:4')
+                self.gc()
+                self.out(2, 4)
+                self.CS = 'H'
+            elif self.CH != EOF and self.CH in '>':
+                # M26: CM -> H
+                self._record('M26', 'H', 'gc, out:2:1')
+                self.gc()
+                self.out(2, 1)
+                self.CS = 'H'
+            else:
+                # M27: CM -> H
+                self._record('M27', 'H', 'out:2:3')
+                self.out(2, 3)
+                self.CS = 'H'
+
+        elif self.CS == 'CB':
+            if self.CH != EOF and self.CH in '=':
+                # M28: CB -> H
+                self._record('M28', 'H', 'gc, out:2:6')
+                self.gc()
+                self.out(2, 6)
+                self.CS = 'H'
+            else:
+                # M29: CB -> H
+                self._record('M29', 'H', 'out:2:5')
+                self.out(2, 5)
+                self.CS = 'H'
+
+        elif self.CS == 'OP':
+            if self.z != 0:
+                # M18: OP -> H
+                self._record('M18', 'H', 'gc, out:2')
+                self.gc()
+                self.out(2, self.z)
+                self.CS = 'H'
+            else:
+                # M19: OP -> ER
+                self._record('M19', 'ER', 'error:CHAR')
+                self._error('Недопустимый символ ' + repr(self.CH), 'M19')
+                self.CS = 'ER'
+
+        else:
+            raise RuntimeError(f"Неизвестное состояние автомата: {self.CS}")
+
+    def gc(self) -> None:
+        if self.pos >= 0:
+            if self.CH == "\n":
+                self.line += 1
+                self.column = 1
+            elif self.CH != EOF:
+                self.column += 1
+        self.pos += 1
+        self.CH = self.text[self.pos] if self.pos < len(self.text) else EOF
+
+    def nill(self) -> None:
+        self.S = ""
+
+    def add(self) -> None:
+        self.S += self.CH
+
+    def look(self, table: int) -> None:
+        self.z = (self._word_table if table == 1 else self._delimiter_table).get(self.S, 0)
+
+    def put(self, table: int, kind: str = "") -> None:
+        if table == 3:
+            if self.S not in self._ti:
+                self.result.identifiers.append(self.S)
+                self._ti[self.S] = len(self.result.identifiers)
+            self.z = self._ti[self.S]
+        elif table == 4:
+            value = convert_number(self.B, kind)
+            if value not in self._tn:
+                self.result.numbers.append(NumberEntry(value))
+                self._tn[value] = len(self.result.numbers)
+            self.z = self._tn[value]
+            record = self.result.numbers[self.z - 1]
+            if self.B not in record.spellings:
+                record.spellings.append(self.B)
+            if kind not in record.kinds:
+                record.kinds.append(kind)
+        else:
+            raise ValueError(table)
+
+    def out(self, table: int, index: int, kind: str = "") -> None:
+        if table == 1:
+            end = self.start + len(self.S)
+        elif table == 2:
+            spelling = TL[index - 1][0]
+            end = self.start + (1 if spelling == "NL" else len(spelling))
+        elif table == 3:
+            end = self.start + len(self.S)
+        else:
+            end = self.start + len(self.B)
+        self.result.tokens.append(Token(table, index, self.text[self.start:end], self.start,
+            end, self.start_line, self.start_column, kind))
+
+    def _error(self, message: str, edge_id: str) -> None:
+        self.result.diagnostics.append(Diagnostic(message, max(0, self.start),
+            min(len(self.text), self.pos + (self.CH != EOF)), self.line, self.column,
+            self.CS, edge_id))

@@ -1,0 +1,18 @@
+{
+  "diagram_edges": 117,
+  "step_cases": 14504,
+  "program_cases": 4230,
+  "covered_edges": 117,
+  "mismatches": 0,
+  "comparison": "real if/elif code vs final XML, including buffers, cursor, tables, tokens, diagnostics and trace",
+  "numeric_language_equivalent_for_all_lengths": true,
+  "tables": {
+    "TW": 1,
+    "TL": 2,
+    "TI": 3,
+    "TN": 4
+  },
+  "unit_tests": 17,
+  "tkinter_smoke": "passed",
+  "diagram_sha256": "a35c59f4dbc43bbe2114515ac443db645feb2ef896837728b48a14a98b0164b1"
+}

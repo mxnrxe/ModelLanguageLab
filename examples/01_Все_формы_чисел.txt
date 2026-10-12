@@ -1,0 +1,6 @@
+dim b, o, d, h %
+dim r !
+b := 00101b: o := 0077O: d := 00010d: h := 1b2H
+r := .5E-2
+writeln b, o, d, h, r, 1E2, 1E2H, 1EH, 10DH, 2BH, 1E2BH
+end

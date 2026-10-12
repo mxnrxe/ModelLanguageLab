@@ -1,0 +1,1629 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<mxfile host="app.diagrams.net" type="device" version="29.0.0">
+  <diagram id="page-1" name="Лексический анализатор">
+    <mxGraphModel grid="0" page="0" pageWidth="1710" pageHeight="4721.4" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="H" value="H" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="H" role="state" entryActions="[]">
+          <mxGeometry x="30.0" y="53.2" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="I" value="I" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="I" role="state" entryActions="[]">
+          <mxGeometry x="250.0" y="165.0" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="KW" value="z≠0" style="rhombus;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=40;fontStyle=2;" vertex="1" parent="1" logicalState="KW" role="state" entryActions="[]">
+          <mxGeometry x="632.0" y="157.0" width="116" height="116" as="geometry"/>
+        </mxCell>
+        <mxCell id="START" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="START" role="state" entryActions="[]">
+          <mxGeometry x="-35.005" y="103.19500000000001" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="M01" value="" edge="1" parent="1" source="START" target="H" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="START" logicalTarget="H" guard="{&quot;type&quot;: &quot;always&quot;}" actions="[&quot;gc&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="M01-act" value="gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=28;spacing=0;">
+          <mxGeometry x="-45.0" y="53.099999999999994" width="70" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="M02" value="" edge="1" parent="1" source="H" target="H" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.7;exitY=0.1;exitPerimeter=1;entryX=0.1;entryY=0.3;entryPerimeter=1;curved=1;" logicalSource="H" logicalTarget="H" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot; \t&quot;}" actions="[&quot;gc&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="155" y="-8.6"/>
+              <mxPoint x="0" y="-8.6"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="M02-cond" value="' '" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=28;spacing=0;">
+          <mxGeometry x="-15.0" y="-11.4" width="180" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="M02-act" value="gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=28;spacing=0;">
+          <mxGeometry x="25.0" y="11.82" width="100" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="dispatch-M03" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="fanPort" entryActions="[]">
+          <mxGeometry x="79.995" y="154.79500000000002" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="M03" value="" edge="1" parent="1" source="dispatch-M03" target="I" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="H" logicalTarget="I" guard="{&quot;type&quot;: &quot;letters&quot;}" actions="[&quot;nill&quot;, &quot;add&quot;, &quot;gc&quot;]" condition="let" action="nill, add, gc">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="88" y="184.9"/>
+              <mxPoint x="140" y="215.0"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="M03-cond" value="let" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="85.0" y="171.78" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="M03-act" value="nill, add, gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="76.0" y="217.35999999999999" width="220" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="loop-M14-a" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="I" role="loopPort" entryActions="[]">
+          <mxGeometry x="399.995" y="214.995" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="loop-M14-b" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="I" role="loopPort" entryActions="[]">
+          <mxGeometry x="199.995" y="214.995" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="M14" value="" edge="1" parent="1" source="loop-M14-a" target="loop-M14-b" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;curved=1;" logicalSource="I" logicalTarget="I" guard="{&quot;type&quot;: &quot;alnum&quot;}" actions="[&quot;add&quot;, &quot;gc&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="455" y="116.1"/>
+              <mxPoint x="145" y="116.1"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="M14-cond" value="let or digit" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="160.0" y="66.0" width="280" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="M14-act" value="add, gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="150.0" y="121.9" width="300" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="M15" value="" edge="1" parent="1" source="I" target="KW" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="I" logicalTarget="KW" guard="{&quot;type&quot;: &quot;not_alnum&quot;}" actions="[&quot;look_TW&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="M15-act" value="look(TW)" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=32;spacing=0;">
+          <mxGeometry x="360.0" y="225.1" width="260" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="return-M16" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="returnPort" entryActions="[]">
+          <mxGeometry x="1659.995" y="214.995" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="M16" value="" edge="1" parent="1" source="KW" target="return-M16" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="KW" logicalTarget="H" guard="{&quot;type&quot;: &quot;z_nonzero&quot;}" actions="[&quot;out:1&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="M16-cond" value="+" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=32;spacing=0;">
+          <mxGeometry x="830.0" y="173.5" width="80" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="M16-act" value="out(1,z)" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=32;spacing=0;">
+          <mxGeometry x="1060.0" y="221.66" width="280" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="return-M17" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="returnPort" entryActions="[]">
+          <mxGeometry x="1659.995" y="283.795" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="M17" value="" edge="1" parent="1" source="KW" target="return-M17" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="KW" logicalTarget="H" guard="{&quot;type&quot;: &quot;z_zero&quot;}" actions="[&quot;put_TI&quot;, &quot;out:3&quot;]" condition="−" action="put(TI), out(3,z)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="690.0" y="283.8"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="M17-cond" value="−" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=26;spacing=0;">
+          <mxGeometry x="760.0" y="242.3" width="180" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="M17-act" value="put(TI), out(3,z)" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1225.0" y="285.3" width="430" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="N2" value="N2" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="N2" role="state" entryActions="[]">
+          <mxGeometry x="250.0" y="328.4" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="P2" value="P2" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="P2" role="state" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="385.0" y="461.7" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="N16" value="N16" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="N16" role="state" entryActions="[]">
+          <mxGeometry x="850.0" y="655.2" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="N8" value="N8" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="N8" role="state" entryActions="[]">
+          <mxGeometry x="250.0" y="990.5999999999999" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="N10" value="N10" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="N10" role="state" entryActions="[]">
+          <mxGeometry x="250.0" y="1257.2" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="U10" value="U10" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="U10" role="state" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="350.0" y="1523.8" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="P8" value="P8" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="P8" role="state" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="1230.0" y="1463.6" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="P16" value="P16" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="P16" role="state" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="1110.0" y="655.2" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="Exp" value="Exp" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="Exp" role="state" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="350.0" y="1902.2" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="TT" value="TT" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="TT" role="state" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="1120.0" y="1902.2" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="Mn" value="Mn" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="Mn" role="state" entryActions="[]">
+          <mxGeometry x="1400.0" y="1902.2" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="T" value="T" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="T" role="state" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="350.0" y="2229.0" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="E1" value="E1" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="E1" role="state" entryActions="[]">
+          <mxGeometry x="1000.0" y="2229.0" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="EX" value="EX" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="EX" role="state" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="350.0" y="2530.0" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="E2" value="E2" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="E2" role="state" entryActions="[]">
+          <mxGeometry x="1040.0" y="2530.0" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="E3" value="E3" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="E3" role="state" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="900.0" y="2710.6" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="E4" value="E4" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="E4" role="state" entryActions="[]">
+          <mxGeometry x="1390.0" y="2710.6" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="PP" value="PP" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="PP" role="state" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="350.0" y="3003.0" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="NK" value="NK" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="NK" role="state" entryActions="[]">
+          <mxGeometry x="1020.0" y="3003.0" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="dispatch-M04" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="fanPort" entryActions="[]">
+          <mxGeometry x="79.995" y="318.195" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="M04" value="" edge="1" parent="1" source="dispatch-M04" target="N2" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="H" logicalTarget="N2" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;01&quot;}" actions="[&quot;B_start&quot;, &quot;gc&quot;]" condition="0,1" action="B=CH, gc">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="88" y="348.3"/>
+              <mxPoint x="140" y="378.4"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="M04-cond" value="0,1" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="85.0" y="335.18" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="M04-act" value="B=CH, gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="76.0" y="380.76" width="220" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="dispatch-M05" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="fanPort" entryActions="[]">
+          <mxGeometry x="79.995" y="980.395" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="M05" value="" edge="1" parent="1" source="dispatch-M05" target="N8" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="H" logicalTarget="N8" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;234567&quot;}" actions="[&quot;B_start&quot;, &quot;gc&quot;]" condition="2–7" action="B=CH, gc">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="88" y="1010.5"/>
+              <mxPoint x="140" y="1040.6"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="M05-cond" value="2–7" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="85.0" y="997.38" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="M05-act" value="B=CH, gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="76.0" y="1042.96" width="220" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="dispatch-M06" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="fanPort" entryActions="[]">
+          <mxGeometry x="79.995" y="1246.995" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="M06" value="" edge="1" parent="1" source="dispatch-M06" target="N10" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="H" logicalTarget="N10" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;89&quot;}" actions="[&quot;B_start&quot;, &quot;gc&quot;]" condition="8,9" action="B=CH, gc">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="88" y="1277.1"/>
+              <mxPoint x="140" y="1307.2"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="M06-cond" value="8,9" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="85.0" y="1263.98" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="M06-act" value="B=CH, gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="76.0" y="1309.56" width="220" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="dispatch-M07" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="fanPort" entryActions="[]">
+          <mxGeometry x="79.995" y="2218.795" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="M07" value="" edge="1" parent="1" source="dispatch-M07" target="T" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="H" logicalTarget="T" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;.&quot;}" actions="[&quot;B_reset&quot;]" condition="'.'" action="B=ε">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="88" y="2248.9"/>
+              <mxPoint x="140" y="2279.0"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="M07-cond" value="'.'" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="85.0" y="2235.7799999999997" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="M07-act" value="B=ε" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="76.0" y="2281.36" width="220" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="loop-R001-a" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N2" role="loopPort" entryActions="[]">
+          <mxGeometry x="349.995" y="378.395" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="loop-R001-b" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N2" role="loopPort" entryActions="[]">
+          <mxGeometry x="249.995" y="378.395" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R001" value="" edge="1" parent="1" source="loop-R001-a" target="loop-R001-b" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;curved=1;" logicalSource="N2" logicalTarget="N2" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;01&quot;}" actions="[&quot;B_append&quot;, &quot;gc&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="455" y="279.5"/>
+              <mxPoint x="145" y="279.5"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R001-cond" value="0,1" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="360.0" y="272.4" width="280" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="R001-act" value="B=B+CH, gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="150.0" y="285.3" width="300" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R002" value="N8" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="N8" role="connector" entryActions="[]">
+          <mxGeometry x="635.0" y="461.7" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R002" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N2" role="fanPort" entryActions="[]">
+          <mxGeometry x="629.995" y="378.395" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R002" value="" edge="1" parent="1" source="fan-R002" target="copy-R002" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" logicalSource="N2" logicalTarget="N8" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;234567&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="640" y="381.84"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R002-cond" value="2–7" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="610.0" y="337.76" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R003" value="N10" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="N10" role="connector" entryActions="[]">
+          <mxGeometry x="760.0" y="461.7" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R003" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N2" role="fanPort" entryActions="[]">
+          <mxGeometry x="754.995" y="378.395" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R003" value="" edge="1" parent="1" source="fan-R003" target="copy-R003" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" logicalSource="N2" logicalTarget="N10" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;89&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="765" y="381.84"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R003-cond" value="8,9" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="735.0" y="337.76" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R004" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N2" role="fanPort" entryActions="[]">
+          <mxGeometry x="379.995" y="378.395" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R004" value="" edge="1" parent="1" source="fan-R004" target="P2" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" logicalSource="N2" logicalTarget="P2" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;Bb&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="390" y="381.84"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R004-cond" value="B,b" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="360.0" y="337.76" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R005" value="U10" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="U10" role="connector" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="1010.0" y="461.7" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R005" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N2" role="fanPort" entryActions="[]">
+          <mxGeometry x="1004.995" y="378.395" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R005" value="" edge="1" parent="1" source="fan-R005" target="copy-R005" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" logicalSource="N2" logicalTarget="U10" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;Dd&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1015" y="381.84"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R005-cond" value="D,d" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="985.0" y="337.76" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R006" value="Exp" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="Exp" role="connector" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="1260.0" y="461.7" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R006" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N2" role="fanPort" entryActions="[]">
+          <mxGeometry x="1254.995" y="378.395" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R006" value="" edge="1" parent="1" source="fan-R006" target="copy-R006" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" logicalSource="N2" logicalTarget="Exp" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;Ee&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1265" y="381.84"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R006-cond" value="E,e" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1235.0" y="337.76" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R007" value="N16" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="N16" role="connector" entryActions="[]">
+          <mxGeometry x="510.0" y="461.7" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R007" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N2" role="fanPort" entryActions="[]">
+          <mxGeometry x="504.995" y="378.395" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R007" value="" edge="1" parent="1" source="fan-R007" target="copy-R007" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" logicalSource="N2" logicalTarget="N16" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;ACFacf&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="515" y="381.84"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R007-cond" value="ACF" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="485.0" y="337.76" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R008" value="P8" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="P8" role="connector" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="885.0" y="461.7" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R008" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N2" role="fanPort" entryActions="[]">
+          <mxGeometry x="879.995" y="378.395" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R008" value="" edge="1" parent="1" source="fan-R008" target="copy-R008" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" logicalSource="N2" logicalTarget="P8" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;Oo&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="890" y="381.84"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R008-cond" value="O,o" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="860.0" y="337.76" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R009" value="P16" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="P16" role="connector" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="1135.0" y="461.7" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R009" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N2" role="fanPort" entryActions="[]">
+          <mxGeometry x="1129.995" y="378.395" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R009" value="" edge="1" parent="1" source="fan-R009" target="copy-R009" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" logicalSource="N2" logicalTarget="P16" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;Hh&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1140" y="381.84"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R009-cond" value="H,h" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1110.0" y="337.76" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R010" value="T" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="T" role="connector" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="1385.0" y="461.7" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R010" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N2" role="fanPort" entryActions="[]">
+          <mxGeometry x="1379.995" y="378.395" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R010" value="" edge="1" parent="1" source="fan-R010" target="copy-R010" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" logicalSource="N2" logicalTarget="T" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;.&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1390" y="381.84"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R010-cond" value="'.'" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1360.0" y="337.76" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="return-R011" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="returnPort" entryActions="[]">
+          <mxGeometry x="1659.995" y="378.395" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R011" value="" edge="1" parent="1" source="N2" target="return-R011" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="N2" logicalTarget="H" guard="{&quot;type&quot;: &quot;boundary&quot;}" actions="[&quot;number:DEC&quot;]" condition="граница" action="put(TN), out(4,z)">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="R011-act" value="put(TN)&#10;out(4,z)" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=23;spacing=0;">
+          <mxGeometry x="1495.0" y="318.02" width="150" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R012" value="ER" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="ER" role="connector" entryActions="[]">
+          <mxGeometry x="1510.0" y="461.7" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="error-branch-R012" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N2" role="fanPort" entryActions="[]">
+          <mxGeometry x="1504.995" y="378.395" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R012" value="" edge="1" parent="1" source="error-branch-R012" target="copy-R012" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" logicalSource="N2" logicalTarget="ER" guard="{&quot;type&quot;: &quot;numeric_other&quot;, &quot;explicit&quot;: &quot;0123456789BbDdEeACFacfOoHh.&quot;, &quot;boundary_except&quot;: &quot;&quot;}" actions="[&quot;error:NUM_FORM&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1515" y="381.84"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="loop-R013-a" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N8" role="loopPort" entryActions="[]">
+          <mxGeometry x="349.995" y="1040.5949999999998" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="loop-R013-b" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N8" role="loopPort" entryActions="[]">
+          <mxGeometry x="249.995" y="1040.5949999999998" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R013" value="" edge="1" parent="1" source="loop-R013-a" target="loop-R013-b" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;curved=1;" logicalSource="N8" logicalTarget="N8" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;01234567&quot;}" actions="[&quot;B_append&quot;, &quot;gc&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="455" y="941.6999999999999"/>
+              <mxPoint x="145" y="941.6999999999999"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R013-cond" value="0–7" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="160.0" y="900.1999999999999" width="280" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="R013-act" value="B=B+CH, gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="150.0" y="947.5" width="300" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R014" value="N10" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="N10" role="connector" entryActions="[]">
+          <mxGeometry x="500.0" y="1111.0" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R014" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N8" role="fanPort" entryActions="[]">
+          <mxGeometry x="494.995" y="1040.5949999999998" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R014" value="" edge="1" parent="1" source="fan-R014" target="copy-R014" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" logicalSource="N8" logicalTarget="N10" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;89&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="505" y="1044.04"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R014-cond" value="8,9" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="475.0" y="999.96" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R015" value="N16" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="N16" role="connector" entryActions="[]">
+          <mxGeometry x="650.0" y="1111.0" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R015" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N8" role="fanPort" entryActions="[]">
+          <mxGeometry x="644.995" y="1040.5949999999998" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R015" value="" edge="1" parent="1" source="fan-R015" target="copy-R015" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" logicalSource="N8" logicalTarget="N16" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;ABCFabcf&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="655" y="1044.04"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R015-cond" value="ABCF" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="625.0" y="999.96" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R016" value="U10" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="U10" role="connector" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="950.0" y="1111.0" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R016" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N8" role="fanPort" entryActions="[]">
+          <mxGeometry x="944.995" y="1040.5949999999998" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R016" value="" edge="1" parent="1" source="fan-R016" target="copy-R016" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" logicalSource="N8" logicalTarget="U10" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;Dd&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="955" y="1044.04"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R016-cond" value="D,d" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="925.0" y="999.96" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R017" value="Exp" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="Exp" role="connector" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="1250.0" y="1111.0" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R017" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N8" role="fanPort" entryActions="[]">
+          <mxGeometry x="1244.995" y="1040.5949999999998" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R017" value="" edge="1" parent="1" source="fan-R017" target="copy-R017" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" logicalSource="N8" logicalTarget="Exp" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;Ee&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1255" y="1044.04"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R017-cond" value="E,e" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1225.0" y="999.96" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R018" value="P8" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="P8" role="connector" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="800.0" y="1111.0" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R018" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N8" role="fanPort" entryActions="[]">
+          <mxGeometry x="794.995" y="1040.5949999999998" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R018" value="" edge="1" parent="1" source="fan-R018" target="copy-R018" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" logicalSource="N8" logicalTarget="P8" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;Oo&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="805" y="1044.04"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R018-cond" value="O,o" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="775.0" y="999.96" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R019" value="P16" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="P16" role="connector" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="1100.0" y="1111.0" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R019" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N8" role="fanPort" entryActions="[]">
+          <mxGeometry x="1094.995" y="1040.5949999999998" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R019" value="" edge="1" parent="1" source="fan-R019" target="copy-R019" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" logicalSource="N8" logicalTarget="P16" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;Hh&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1105" y="1044.04"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R019-cond" value="H,h" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1075.0" y="999.96" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R020" value="T" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="T" role="connector" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="1400.0" y="1111.0" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R020" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N8" role="fanPort" entryActions="[]">
+          <mxGeometry x="1394.995" y="1040.5949999999998" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R020" value="" edge="1" parent="1" source="fan-R020" target="copy-R020" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" logicalSource="N8" logicalTarget="T" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;.&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1405" y="1044.04"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R020-cond" value="'.'" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1375.0" y="999.96" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="return-R021" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="returnPort" entryActions="[]">
+          <mxGeometry x="1659.995" y="1040.5949999999998" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R021" value="" edge="1" parent="1" source="N8" target="return-R021" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="N8" logicalTarget="H" guard="{&quot;type&quot;: &quot;boundary&quot;}" actions="[&quot;number:DEC&quot;]" condition="граница" action="put(TN), out(4,z)">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="R021-act" value="put(TN)&#10;out(4,z)" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=23;spacing=0;">
+          <mxGeometry x="1495.0" y="975.92" width="150" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R022" value="ER" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="ER" role="connector" entryActions="[]">
+          <mxGeometry x="1540.0" y="1111.0" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="error-branch-R022" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N8" role="fanPort" entryActions="[]">
+          <mxGeometry x="1534.995" y="1040.5949999999998" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R022" value="" edge="1" parent="1" source="error-branch-R022" target="copy-R022" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" logicalSource="N8" logicalTarget="ER" guard="{&quot;type&quot;: &quot;numeric_other&quot;, &quot;explicit&quot;: &quot;0123456789ABCFabcfDdEeOoHh.&quot;, &quot;boundary_except&quot;: &quot;&quot;}" actions="[&quot;error:NUM_FORM&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1545" y="1044.04"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="loop-R023-a" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N10" role="loopPort" entryActions="[]">
+          <mxGeometry x="349.995" y="1307.195" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="loop-R023-b" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N10" role="loopPort" entryActions="[]">
+          <mxGeometry x="249.995" y="1307.195" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R023" value="" edge="1" parent="1" source="loop-R023-a" target="loop-R023-b" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;curved=1;" logicalSource="N10" logicalTarget="N10" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;0123456789&quot;}" actions="[&quot;B_append&quot;, &quot;gc&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="455" y="1208.3"/>
+              <mxPoint x="145" y="1208.3"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R023-cond" value="0–9" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="160.0" y="1166.8" width="280" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="R023-act" value="B=B+CH, gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="150.0" y="1214.1" width="300" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R024" value="N16" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="N16" role="connector" entryActions="[]">
+          <mxGeometry x="530.0" y="1377.6" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R024" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N10" role="fanPort" entryActions="[]">
+          <mxGeometry x="524.995" y="1307.195" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R024" value="" edge="1" parent="1" source="fan-R024" target="copy-R024" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" logicalSource="N10" logicalTarget="N16" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;ABCFabcf&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="535" y="1310.6399999999999"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R024-cond" value="ABCF" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="505.0" y="1266.56" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R025" value="U10" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="U10" role="connector" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="724.0" y="1377.6" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R025" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N10" role="fanPort" entryActions="[]">
+          <mxGeometry x="718.995" y="1307.195" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R025" value="" edge="1" parent="1" source="fan-R025" target="copy-R025" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" logicalSource="N10" logicalTarget="U10" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;Dd&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="729" y="1310.6399999999999"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R025-cond" value="D,d" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="699.0" y="1266.56" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R026" value="Exp" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="Exp" role="connector" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="1112.0" y="1377.6" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R026" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N10" role="fanPort" entryActions="[]">
+          <mxGeometry x="1106.995" y="1307.195" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R026" value="" edge="1" parent="1" source="fan-R026" target="copy-R026" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" logicalSource="N10" logicalTarget="Exp" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;Ee&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1117" y="1310.6399999999999"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R026-cond" value="E,e" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1087.0" y="1266.56" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R027" value="P16" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="P16" role="connector" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="918.0" y="1377.6" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R027" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N10" role="fanPort" entryActions="[]">
+          <mxGeometry x="912.995" y="1307.195" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R027" value="" edge="1" parent="1" source="fan-R027" target="copy-R027" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" logicalSource="N10" logicalTarget="P16" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;Hh&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="923" y="1310.6399999999999"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R027-cond" value="H,h" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="893.0" y="1266.56" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R028" value="T" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="T" role="connector" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="1306.0" y="1377.6" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R028" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N10" role="fanPort" entryActions="[]">
+          <mxGeometry x="1300.995" y="1307.195" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R028" value="" edge="1" parent="1" source="fan-R028" target="copy-R028" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" logicalSource="N10" logicalTarget="T" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;.&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1311" y="1310.6399999999999"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R028-cond" value="'.'" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1281.0" y="1266.56" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="return-R029" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="returnPort" entryActions="[]">
+          <mxGeometry x="1659.995" y="1307.195" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R029" value="" edge="1" parent="1" source="N10" target="return-R029" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="N10" logicalTarget="H" guard="{&quot;type&quot;: &quot;boundary&quot;}" actions="[&quot;number:DEC&quot;]" condition="граница" action="put(TN), out(4,z)">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="R029-act" value="put(TN)&#10;out(4,z)" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=23;spacing=0;">
+          <mxGeometry x="1495.0" y="1242.52" width="150" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R030" value="ER" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="ER" role="connector" entryActions="[]">
+          <mxGeometry x="1500.0" y="1377.6" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="error-branch-R030" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N10" role="fanPort" entryActions="[]">
+          <mxGeometry x="1494.995" y="1307.195" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R030" value="" edge="1" parent="1" source="error-branch-R030" target="copy-R030" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" logicalSource="N10" logicalTarget="ER" guard="{&quot;type&quot;: &quot;numeric_other&quot;, &quot;explicit&quot;: &quot;0123456789ABCFabcfDdEeHh.&quot;, &quot;boundary_except&quot;: &quot;&quot;}" actions="[&quot;error:NUM_FORM&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1505" y="1310.6399999999999"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="entry-P2" value="B=B+CH, gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="440.0" y="573.4" width="260" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="attached-R031" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="P2" role="fanPort" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="434.995" y="705.195" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R031" value="" edge="1" parent="1" source="attached-R031" target="N16" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="P2" logicalTarget="N16" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;0123456789ABCDEFabcdef&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="R031-cond" value="HEX" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="560.0" y="659.4" width="180" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R032" value="P16" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="P16" role="connector" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="250.0" y="655.2" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="attached-R032" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="P2" role="fanPort" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="434.995" y="705.195" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R032" value="" edge="1" parent="1" source="attached-R032" target="copy-R032" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;" logicalSource="P2" logicalTarget="P16" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;Hh&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="R032-cond" value="H,h" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="300.0" y="616.4" width="180" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="return-R033" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="returnPort" entryActions="[]">
+          <mxGeometry x="1659.995" y="834.1949999999999" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R033" value="" edge="1" parent="1" source="P2" target="return-R033" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="P2" logicalTarget="H" guard="{&quot;type&quot;: &quot;boundary&quot;}" actions="[&quot;number:BIN&quot;]" condition="граница" action="put(TN), out(4,z)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="435" y="834.1999999999999"/>
+              <mxPoint x="600" y="834.1999999999999"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R033-act" value="put(TN), out(4,z)" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1225.0" y="835.6999999999999" width="430" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R034" value="ER" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="ER" role="connector" entryActions="[]">
+          <mxGeometry x="250.0" y="767.0" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="attached-error-R034" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="P2" role="fanPort" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="434.995" y="752.495" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R034" value="" edge="1" parent="1" source="attached-error-R034" target="copy-R034" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;" logicalSource="P2" logicalTarget="ER" guard="{&quot;type&quot;: &quot;numeric_other&quot;, &quot;explicit&quot;: &quot;0123456789ABCDEFabcdefHh&quot;, &quot;boundary_except&quot;: &quot;&quot;}" actions="[&quot;error:NUM_FORM&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="420" y="782.6"/>
+              <mxPoint x="355" y="817.0"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="entry-U10" value="B=B+CH, gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="110.0" y="1553.8" width="260" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R035" value="N16" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="N16" role="connector" entryActions="[]">
+          <mxGeometry x="610.0" y="1661.3999999999999" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R035" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="U10" role="fanPort" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="604.995" y="1638.2949999999998" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R035" value="" edge="1" parent="1" source="fan-R035" target="copy-R035" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.2;entryY=0.1;entryPerimeter=1;" logicalSource="U10" logicalTarget="N16" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;0123456789ABCDEFabcdef&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="625" y="1645.18"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R035-cond" value="HEX" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="585.0" y="1597.66" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R036" value="P16" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="P16" role="connector" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="805.0" y="1661.3999999999999" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R036" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="U10" role="fanPort" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="799.995" y="1638.2949999999998" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R036" value="" edge="1" parent="1" source="fan-R036" target="copy-R036" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.2;entryY=0.1;entryPerimeter=1;" logicalSource="U10" logicalTarget="P16" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;Hh&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="820" y="1645.18"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R036-cond" value="H,h" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="780.0" y="1597.66" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="return-R037" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="returnPort" entryActions="[]">
+          <mxGeometry x="1659.995" y="1573.7949999999998" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R037" value="" edge="1" parent="1" source="U10" target="return-R037" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="U10" logicalTarget="H" guard="{&quot;type&quot;: &quot;boundary&quot;}" actions="[&quot;number:DEC_D&quot;]" condition="граница" action="put(TN), out(4,z)">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="R037-act" value="put(TN), out(4,z)" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="885.0" y="1575.3" width="430" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R038" value="ER" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="ER" role="connector" entryActions="[]">
+          <mxGeometry x="1040.0" y="1661.3999999999999" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="R038" value="" edge="1" parent="1" source="U10" target="copy-R038" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.2;entryY=0.1;entryPerimeter=1;" logicalSource="U10" logicalTarget="ER" guard="{&quot;type&quot;: &quot;numeric_other&quot;, &quot;explicit&quot;: &quot;0123456789ABCDEFabcdefHh&quot;, &quot;boundary_except&quot;: &quot;&quot;}" actions="[&quot;error:NUM_FORM&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="400" y="1638.3"/>
+              <mxPoint x="1035" y="1638.3"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="loop-R039-a" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N16" role="loopPort" entryActions="[]">
+          <mxGeometry x="949.995" y="705.195" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="loop-R039-b" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="N16" role="loopPort" entryActions="[]">
+          <mxGeometry x="849.995" y="705.195" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R039" value="" edge="1" parent="1" source="loop-R039-a" target="loop-R039-b" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;curved=1;" logicalSource="N16" logicalTarget="N16" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;0123456789ABCDEFabcdef&quot;}" actions="[&quot;B_append&quot;, &quot;gc&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1055" y="606.3"/>
+              <mxPoint x="745" y="606.3"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R039-cond" value="HEX" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="760.0" y="564.8" width="280" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="R039-act" value="B=B+CH, gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="750.0" y="612.1" width="300" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="R040" value="" edge="1" parent="1" source="N16" target="P16" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="N16" logicalTarget="P16" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;Hh&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="R040-cond" value="H,h" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="930.0" y="715.3" width="200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-error-N16" value="ER" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="ER" role="connector" entryActions="[]">
+          <mxGeometry x="750.0" y="715.4" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="R041" value="" edge="1" parent="1" source="N16" target="copy-error-N16" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.1;exitY=0.8;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;curved=1;opacity=0;" logicalSource="N16" logicalTarget="ER" guard="{&quot;type&quot;: &quot;boundary&quot;, &quot;except&quot;: &quot;&quot;}" actions="[&quot;error:NUM_INCOMPLETE&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="R042" value="" edge="1" parent="1" source="N16" target="copy-error-N16" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.2;exitY=0.9;exitPerimeter=1;entryX=0.8;entryY=0.1;entryPerimeter=1;" logicalSource="N16" logicalTarget="ER" guard="{&quot;type&quot;: &quot;numeric_other&quot;, &quot;explicit&quot;: &quot;0123456789ABCDEFabcdefHh&quot;, &quot;boundary_except&quot;: &quot;&quot;}" actions="[&quot;error:NUM_FORM&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="entry-P8" value="B=B+CH, gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="990.0" y="1493.6" width="260" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="return-R043" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="returnPort" entryActions="[]">
+          <mxGeometry x="1659.995" y="1513.5949999999998" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="shared-return-R043" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="returnPort" entryActions="[]">
+          <mxGeometry x="1279.995" y="1573.7949999999998" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R043" value="" edge="1" parent="1" source="P8" target="shared-return-R043" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="P8" logicalTarget="H" guard="{&quot;type&quot;: &quot;boundary&quot;}" actions="[&quot;number:OCT&quot;]" condition="граница" action="put(TN), out(4,z)">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R044" value="ER" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="ER" role="connector" entryActions="[]">
+          <mxGeometry x="1400.0" y="1463.6" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="R044" value="" edge="1" parent="1" source="P8" target="copy-R044" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="P8" logicalTarget="ER" guard="{&quot;type&quot;: &quot;numeric_other&quot;, &quot;explicit&quot;: &quot;&quot;, &quot;boundary_except&quot;: &quot;&quot;}" actions="[&quot;error:NUM_FORM&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="entry-P16" value="B=B+CH, gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="1030.0" y="762.6" width="260" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="return-R045" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="returnPort" entryActions="[]">
+          <mxGeometry x="1659.995" y="705.195" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R045" value="" edge="1" parent="1" source="P16" target="return-R045" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="P16" logicalTarget="H" guard="{&quot;type&quot;: &quot;boundary&quot;}" actions="[&quot;number:HEX&quot;]" condition="граница" action="put(TN), out(4,z)">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="R045-act" value="put(TN), out(4,z)" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1235.0" y="655.1" width="430" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R046" value="ER" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="ER" role="connector" entryActions="[]">
+          <mxGeometry x="1400.0" y="724.0" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="R046" value="" edge="1" parent="1" source="P16" target="copy-R046" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.8;exitY=0.9;exitPerimeter=1;entryX=0.2;entryY=0.1;entryPerimeter=1;" logicalSource="P16" logicalTarget="ER" guard="{&quot;type&quot;: &quot;numeric_other&quot;, &quot;explicit&quot;: &quot;&quot;, &quot;boundary_except&quot;: &quot;&quot;}" actions="[&quot;error:NUM_FORM&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="entry-Exp" value="B=B+CH, gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="110.0" y="1932.2" width="260" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R047" value="PP" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="PP" role="connector" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="830.0" y="2039.8000000000002" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R047" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="Exp" role="fanPort" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="824.995" y="2016.695" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R047" value="" edge="1" parent="1" source="fan-R047" target="copy-R047" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.2;entryY=0.1;entryPerimeter=1;" logicalSource="Exp" logicalTarget="PP" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;0123456789&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="845" y="2023.58"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R047-cond" value="0–9" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="805.0" y="1976.06" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="R048" value="" edge="1" parent="1" source="Exp" target="TT" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="Exp" logicalTarget="TT" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;+-&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="R048-cond" value="'+','−'" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="685.0" y="1908.98" width="200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R049" value="N16" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="N16" role="connector" entryActions="[]">
+          <mxGeometry x="490.0" y="2039.8000000000002" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R049" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="Exp" role="fanPort" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="484.995" y="2016.695" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R049" value="" edge="1" parent="1" source="fan-R049" target="copy-R049" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.2;entryY=0.1;entryPerimeter=1;" logicalSource="Exp" logicalTarget="N16" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;ABCDEFabcdef&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="505" y="2023.58"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R049-cond" value="A–F/a–f" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="465.0" y="1976.06" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R050" value="P16" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="P16" role="connector" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="660.0" y="2039.8000000000002" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R050" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="Exp" role="fanPort" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="654.995" y="2016.695" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R050" value="" edge="1" parent="1" source="fan-R050" target="copy-R050" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.2;entryY=0.1;entryPerimeter=1;" logicalSource="Exp" logicalTarget="P16" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;Hh&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="675" y="2023.58"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R050-cond" value="H,h" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="635.0" y="1976.06" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-error-Exp" value="ER" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="ER" role="connector" entryActions="[]">
+          <mxGeometry x="1000.0" y="2039.8000000000002" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="R051" value="" edge="1" parent="1" source="Exp" target="copy-error-Exp" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.1;exitY=0.8;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;curved=1;opacity=0;" logicalSource="Exp" logicalTarget="ER" guard="{&quot;type&quot;: &quot;boundary&quot;, &quot;except&quot;: &quot;+-&quot;}" actions="[&quot;error:NUM_INCOMPLETE&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="R052" value="" edge="1" parent="1" source="Exp" target="copy-error-Exp" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.2;entryY=0.1;entryPerimeter=1;" logicalSource="Exp" logicalTarget="ER" guard="{&quot;type&quot;: &quot;numeric_other&quot;, &quot;explicit&quot;: &quot;0123456789+-ABCDEFabcdefHh&quot;, &quot;boundary_except&quot;: &quot;+-&quot;}" actions="[&quot;error:NUM_FORM&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="400" y="2016.7"/>
+              <mxPoint x="995" y="2016.7"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="loop-R053-a" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="NK" role="loopPort" entryActions="[]">
+          <mxGeometry x="1119.995" y="3052.995" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="loop-R053-b" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="NK" role="loopPort" entryActions="[]">
+          <mxGeometry x="1019.995" y="3052.995" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R053" value="" edge="1" parent="1" source="loop-R053-a" target="loop-R053-b" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;curved=1;" logicalSource="NK" logicalTarget="NK" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;0123456789&quot;}" actions="[&quot;B_append&quot;, &quot;gc&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1225" y="2954.1"/>
+              <mxPoint x="915" y="2954.1"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R053-cond" value="0–9" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="930.0" y="2912.6" width="280" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="R053-act" value="B=B+CH, gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="920.0" y="2959.9" width="300" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R054" value="N16" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="N16" role="connector" entryActions="[]">
+          <mxGeometry x="1200.0" y="3157.7999999999997" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R054" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="NK" role="fanPort" entryActions="[]">
+          <mxGeometry x="1194.995" y="3117.495" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R054" value="" edge="1" parent="1" source="fan-R054" target="copy-R054" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.2;entryY=0.1;entryPerimeter=1;" logicalSource="NK" logicalTarget="N16" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;ABCDEFabcdef&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1215" y="3124.38"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R054-cond" value="A–F/a–f" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1175.0" y="3076.86" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R055" value="P16" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="P16" role="connector" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="1420.0" y="3157.7999999999997" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R055" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="NK" role="fanPort" entryActions="[]">
+          <mxGeometry x="1414.995" y="3117.495" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R055" value="" edge="1" parent="1" source="fan-R055" target="copy-R055" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.2;entryY=0.1;entryPerimeter=1;" logicalSource="NK" logicalTarget="P16" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;Hh&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1435" y="3124.38"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R055-cond" value="H,h" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1395.0" y="3076.86" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="return-R056" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="returnPort" entryActions="[]">
+          <mxGeometry x="1659.995" y="3052.995" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R056" value="" edge="1" parent="1" source="NK" target="return-R056" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="NK" logicalTarget="H" guard="{&quot;type&quot;: &quot;boundary&quot;}" actions="[&quot;number:REAL&quot;]" condition="граница" action="put(TN), out(4,z)">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="R056-act" value="put(TN), out(4,z)" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1225.0" y="3007.2" width="430" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R057" value="ER" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="ER" role="connector" entryActions="[]">
+          <mxGeometry x="1550.0" y="3157.7999999999997" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="R057" value="" edge="1" parent="1" source="NK" target="copy-R057" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.2;entryY=0.1;entryPerimeter=1;" logicalSource="NK" logicalTarget="ER" guard="{&quot;type&quot;: &quot;numeric_other&quot;, &quot;explicit&quot;: &quot;0123456789ABCDEFabcdefHh&quot;, &quot;boundary_except&quot;: &quot;&quot;}" actions="[&quot;error:NUM_FORM&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1070" y="3117.5"/>
+              <mxPoint x="1545" y="3117.5"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="entry-TT" value="B=B+CH, gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="1170.0" y="1983.8" width="260" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="R058" value="" edge="1" parent="1" source="TT" target="Mn" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="TT" logicalTarget="Mn" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;0123456789&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="R058-cond" value="0–9" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1210.0" y="1908.98" width="200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="R059" value="" edge="1" parent="1" source="TT" target="copy-error-Exp" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.1;exitY=0.8;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;curved=1;opacity=0;" logicalSource="TT" logicalTarget="ER" guard="{&quot;type&quot;: &quot;boundary&quot;, &quot;except&quot;: &quot;&quot;}" actions="[&quot;error:NUM_INCOMPLETE&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="R060" value="" edge="1" parent="1" source="TT" target="copy-error-Exp" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" logicalSource="TT" logicalTarget="ER" guard="{&quot;type&quot;: &quot;numeric_other&quot;, &quot;explicit&quot;: &quot;0123456789&quot;, &quot;boundary_except&quot;: &quot;&quot;}" actions="[&quot;error:NUM_FORM&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="entry-T" value="B=B+CH, gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="270.0" y="2345.0" width="260" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="R061" value="" edge="1" parent="1" source="T" target="E1" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="T" logicalTarget="E1" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;0123456789&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="R061-cond" value="0–9" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="625.0" y="2235.7799999999997" width="200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-error-T" value="ER" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="ER" role="connector" entryActions="[]">
+          <mxGeometry x="160.0" y="2349.4" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="R062" value="" edge="1" parent="1" source="T" target="copy-error-T" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.1;exitY=0.8;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;curved=1;opacity=0;" logicalSource="T" logicalTarget="ER" guard="{&quot;type&quot;: &quot;boundary&quot;, &quot;except&quot;: &quot;&quot;}" actions="[&quot;error:NUM_INCOMPLETE&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="R063" value="" edge="1" parent="1" source="T" target="copy-error-T" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.1;exitY=0.8;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;" logicalSource="T" logicalTarget="ER" guard="{&quot;type&quot;: &quot;numeric_other&quot;, &quot;explicit&quot;: &quot;0123456789&quot;, &quot;boundary_except&quot;: &quot;&quot;}" actions="[&quot;error:NUM_FORM&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="320" y="2352.1"/>
+              <mxPoint x="275" y="2377.9"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="loop-R064-a" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="E1" role="loopPort" entryActions="[]">
+          <mxGeometry x="1099.995" y="2278.995" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="loop-R064-b" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="E1" role="loopPort" entryActions="[]">
+          <mxGeometry x="999.995" y="2278.995" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R064" value="" edge="1" parent="1" source="loop-R064-a" target="loop-R064-b" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;curved=1;" logicalSource="E1" logicalTarget="E1" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;0123456789&quot;}" actions="[&quot;B_append&quot;, &quot;gc&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1205" y="2180.1"/>
+              <mxPoint x="895" y="2180.1"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R064-cond" value="0–9" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="910.0" y="2138.6" width="280" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="R064-act" value="B=B+CH, gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="900.0" y="2185.9" width="300" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R065" value="EX" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="EX" role="connector" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="1400.0" y="2366.6" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="R065" value="" edge="1" parent="1" source="E1" target="copy-R065" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.9;exitY=0.8;exitPerimeter=1;entryX=0.2;entryY=0.1;entryPerimeter=1;" logicalSource="E1" logicalTarget="EX" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;Ee&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1130" y="2343.5"/>
+              <mxPoint x="1395" y="2343.5"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R065-cond" value="E,e" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1375.0" y="2302.86" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="return-R066" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="returnPort" entryActions="[]">
+          <mxGeometry x="1659.995" y="2278.995" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R066" value="" edge="1" parent="1" source="E1" target="return-R066" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="E1" logicalTarget="H" guard="{&quot;type&quot;: &quot;boundary&quot;}" actions="[&quot;number:REAL&quot;]" condition="граница" action="put(TN), out(4,z)">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="R066-act" value="put(TN), out(4,z)" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1225.0" y="2233.2" width="430" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R067" value="ER" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="ER" role="connector" entryActions="[]">
+          <mxGeometry x="900.0" y="2349.4" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="R067" value="" edge="1" parent="1" source="E1" target="copy-R067" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.2;exitY=0.9;exitPerimeter=1;entryX=0.8;entryY=0.1;entryPerimeter=1;" logicalSource="E1" logicalTarget="ER" guard="{&quot;type&quot;: &quot;numeric_other&quot;, &quot;explicit&quot;: &quot;0123456789Ee&quot;, &quot;boundary_except&quot;: &quot;&quot;}" actions="[&quot;error:NUM_FORM&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="entry-EX" value="B=B+CH, gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="110.0" y="2560.0" width="260" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="R068" value="" edge="1" parent="1" source="EX" target="E2" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="EX" logicalTarget="E2" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;0123456789&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="R068-cond" value="0–9" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="645.0" y="2536.7799999999997" width="200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="R069" value="" edge="1" parent="1" source="EX" target="E3" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.9;exitY=0.8;exitPerimeter=1;entryX=0.2;entryY=0.1;entryPerimeter=1;" logicalSource="EX" logicalTarget="E3" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;+-&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="480" y="2644.5"/>
+              <mxPoint x="895" y="2644.5"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R069-cond" value="'+','−'" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="875.0" y="2603.86" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-error-EX" value="ER" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="ER" role="connector" entryActions="[]">
+          <mxGeometry x="170.0" y="2650.4" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="R070" value="" edge="1" parent="1" source="EX" target="copy-error-EX" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.1;exitY=0.8;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;curved=1;opacity=0;" logicalSource="EX" logicalTarget="ER" guard="{&quot;type&quot;: &quot;boundary&quot;, &quot;except&quot;: &quot;+-&quot;}" actions="[&quot;error:NUM_INCOMPLETE&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="R071" value="" edge="1" parent="1" source="EX" target="copy-error-EX" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.1;exitY=0.8;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;" logicalSource="EX" logicalTarget="ER" guard="{&quot;type&quot;: &quot;numeric_other&quot;, &quot;explicit&quot;: &quot;0123456789+-&quot;, &quot;boundary_except&quot;: &quot;+-&quot;}" actions="[&quot;error:NUM_FORM&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="320" y="2653.1"/>
+              <mxPoint x="285" y="2678.9"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="loop-R072-a" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="Mn" role="loopPort" entryActions="[]">
+          <mxGeometry x="1499.995" y="1952.195" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="loop-R072-b" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="Mn" role="loopPort" entryActions="[]">
+          <mxGeometry x="1399.995" y="1952.195" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R072" value="" edge="1" parent="1" source="loop-R072-a" target="loop-R072-b" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;curved=1;" logicalSource="Mn" logicalTarget="Mn" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;0123456789&quot;}" actions="[&quot;B_append&quot;, &quot;gc&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1605" y="1853.3"/>
+              <mxPoint x="1295" y="1853.3"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R072-cond" value="0–9" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1310.0" y="1811.8" width="280" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="R072-act" value="B=B+CH, gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="1300.0" y="1859.1" width="300" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="return-R073" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="returnPort" entryActions="[]">
+          <mxGeometry x="1659.995" y="1952.195" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R073" value="" edge="1" parent="1" source="Mn" target="return-R073" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="Mn" logicalTarget="H" guard="{&quot;type&quot;: &quot;boundary&quot;}" actions="[&quot;number:REAL&quot;]" condition="граница" action="put(TN), out(4,z)">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="R073-act" value="put(TN)&#10;out(4,z)" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=23;spacing=0;">
+          <mxGeometry x="1495.0" y="1956.32" width="150" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R074" value="ER" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="ER" role="connector" entryActions="[]">
+          <mxGeometry x="1530.0" y="2057.0" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="error-junction-R074" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="Mn" role="fanPort" entryActions="[]">
+          <mxGeometry x="1649.995" y="1952.195" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R074" value="" edge="1" parent="1" source="error-junction-R074" target="copy-R074" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" logicalSource="Mn" logicalTarget="ER" guard="{&quot;type&quot;: &quot;numeric_other&quot;, &quot;explicit&quot;: &quot;0123456789&quot;, &quot;boundary_except&quot;: &quot;&quot;}" actions="[&quot;error:NUM_FORM&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1650" y="2029.6"/>
+              <mxPoint x="1580" y="2029.6"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="entry-PP" value="B=B+CH, gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="110.0" y="3033.0" width="260" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="R075" value="" edge="1" parent="1" source="PP" target="NK" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="PP" logicalTarget="NK" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;0123456789&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="R075-cond" value="0–9" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="635.0" y="3009.7799999999997" width="200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R076" value="N16" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="N16" role="connector" entryActions="[]">
+          <mxGeometry x="500.0" y="3157.7999999999997" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R076" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="PP" role="fanPort" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="494.995" y="3117.495" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R076" value="" edge="1" parent="1" source="fan-R076" target="copy-R076" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.2;entryY=0.1;entryPerimeter=1;" logicalSource="PP" logicalTarget="N16" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;ABCDEFabcdef&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="515" y="3124.38"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R076-cond" value="A–F/a–f" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="475.0" y="3076.86" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R077" value="P16" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="P16" role="connector" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="700.0" y="3157.7999999999997" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="fan-R077" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="PP" role="fanPort" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="694.995" y="3117.495" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R077" value="" edge="1" parent="1" source="fan-R077" target="copy-R077" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.2;entryY=0.1;entryPerimeter=1;" logicalSource="PP" logicalTarget="P16" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;Hh&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="715" y="3124.38"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R077-cond" value="H,h" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="675.0" y="3076.86" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="return-R078" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="returnPort" entryActions="[]">
+          <mxGeometry x="1659.995" y="3310.995" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R078" value="" edge="1" parent="1" source="PP" target="return-R078" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="PP" logicalTarget="H" guard="{&quot;type&quot;: &quot;boundary&quot;}" actions="[&quot;number:REAL&quot;]" condition="граница" action="put(TN), out(4,z)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="400" y="3311.0"/>
+              <mxPoint x="560" y="3311.0"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R078-act" value="put(TN), out(4,z)" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1225.0" y="3312.5" width="430" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R079" value="ER" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="ER" role="connector" entryActions="[]">
+          <mxGeometry x="980.0" y="3157.7999999999997" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="PP-fan-R079" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="PP" role="fanPort" entryActions="[&quot;B_append&quot;, &quot;gc&quot;]">
+          <mxGeometry x="399.995" y="3117.495" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R079" value="" edge="1" parent="1" source="PP-fan-R079" target="copy-R079" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0.2;entryY=0.1;entryPerimeter=1;" logicalSource="PP" logicalTarget="ER" guard="{&quot;type&quot;: &quot;numeric_other&quot;, &quot;explicit&quot;: &quot;0123456789ABCDEFabcdefHh&quot;, &quot;boundary_except&quot;: &quot;&quot;}" actions="[&quot;error:NUM_FORM&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="975" y="3117.5"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="loop-R080-a" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="E2" role="loopPort" entryActions="[]">
+          <mxGeometry x="1139.995" y="2579.995" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="loop-R080-b" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="E2" role="loopPort" entryActions="[]">
+          <mxGeometry x="1039.995" y="2579.995" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R080" value="" edge="1" parent="1" source="loop-R080-a" target="loop-R080-b" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;curved=1;" logicalSource="E2" logicalTarget="E2" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;0123456789&quot;}" actions="[&quot;B_append&quot;, &quot;gc&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1245" y="2481.1"/>
+              <mxPoint x="935" y="2481.1"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R080-cond" value="0–9" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="950.0" y="2439.6" width="280" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="R080-act" value="B=B+CH, gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="940.0" y="2486.9" width="300" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="return-R081" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="returnPort" entryActions="[]">
+          <mxGeometry x="1659.995" y="2579.995" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R081" value="" edge="1" parent="1" source="E2" target="return-R081" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="E2" logicalTarget="H" guard="{&quot;type&quot;: &quot;boundary&quot;}" actions="[&quot;number:REAL&quot;]" condition="граница" action="put(TN), out(4,z)">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="R081-act" value="put(TN), out(4,z)" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1225.0" y="2534.2" width="430" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R082" value="ER" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="ER" role="connector" entryActions="[]">
+          <mxGeometry x="1150.0" y="2616.0" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="R082" value="" edge="1" parent="1" source="E2" target="copy-R082" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.8;exitY=0.9;exitPerimeter=1;entryX=0.2;entryY=0.1;entryPerimeter=1;" logicalSource="E2" logicalTarget="ER" guard="{&quot;type&quot;: &quot;numeric_other&quot;, &quot;explicit&quot;: &quot;0123456789&quot;, &quot;boundary_except&quot;: &quot;&quot;}" actions="[&quot;error:NUM_FORM&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="entry-E3" value="B=B+CH, gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="660.0" y="2740.6" width="260" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="R083" value="" edge="1" parent="1" source="E3" target="E4" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="E3" logicalTarget="E4" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;0123456789&quot;}" actions="[]" condition="" action="">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="R083-cond" value="0–9" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1095.0" y="2717.38" width="200" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-error-E3" value="ER" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="ER" role="connector" entryActions="[]">
+          <mxGeometry x="750.0" y="2831.0" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="R084" value="" edge="1" parent="1" source="E3" target="copy-error-E3" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.1;exitY=0.8;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;curved=1;opacity=0;" logicalSource="E3" logicalTarget="ER" guard="{&quot;type&quot;: &quot;boundary&quot;, &quot;except&quot;: &quot;&quot;}" actions="[&quot;error:NUM_INCOMPLETE&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="R085" value="" edge="1" parent="1" source="E3" target="copy-error-E3" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.1;exitY=0.8;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;" logicalSource="E3" logicalTarget="ER" guard="{&quot;type&quot;: &quot;numeric_other&quot;, &quot;explicit&quot;: &quot;0123456789&quot;, &quot;boundary_except&quot;: &quot;&quot;}" actions="[&quot;error:NUM_FORM&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="870" y="2833.7"/>
+              <mxPoint x="865" y="2859.5"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="loop-R086-a" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="E4" role="loopPort" entryActions="[]">
+          <mxGeometry x="1489.995" y="2760.595" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="loop-R086-b" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="E4" role="loopPort" entryActions="[]">
+          <mxGeometry x="1389.995" y="2760.595" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R086" value="" edge="1" parent="1" source="loop-R086-a" target="loop-R086-b" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;curved=1;" logicalSource="E4" logicalTarget="E4" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;0123456789&quot;}" actions="[&quot;B_append&quot;, &quot;gc&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1595" y="2661.7"/>
+              <mxPoint x="1285" y="2661.7"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="R086-cond" value="0–9" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1300.0" y="2620.2" width="280" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="R086-act" value="B=B+CH, gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="1290.0" y="2667.5" width="300" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="return-R087" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="returnPort" entryActions="[]">
+          <mxGeometry x="1659.995" y="2760.595" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R087" value="" edge="1" parent="1" source="E4" target="return-R087" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="E4" logicalTarget="H" guard="{&quot;type&quot;: &quot;boundary&quot;}" actions="[&quot;number:REAL&quot;]" condition="граница" action="put(TN), out(4,z)">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="R087-act" value="put(TN)&#10;out(4,z)" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=23;spacing=0;">
+          <mxGeometry x="1495.0" y="2764.72" width="150" height="64" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-R088" value="ER" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="ER" role="connector" entryActions="[]">
+          <mxGeometry x="1500.0" y="2891.2" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="error-junction-R088" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="E4" role="fanPort" entryActions="[]">
+          <mxGeometry x="1649.995" y="2760.595" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="R088" value="" edge="1" parent="1" source="error-junction-R088" target="copy-R088" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" logicalSource="E4" logicalTarget="ER" guard="{&quot;type&quot;: &quot;numeric_other&quot;, &quot;explicit&quot;: &quot;0123456789&quot;, &quot;boundary_except&quot;: &quot;&quot;}" actions="[&quot;error:NUM_FORM&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1650" y="2872.4"/>
+              <mxPoint x="1550" y="2872.4"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="fork-P2" value="" vertex="1" parent="1" role="junction" logicalState="P2" style="ellipse;fillColor=#000000;strokeColor=#000000;strokeWidth=1;">
+          <mxGeometry x="432" y="702.2" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="fork-P2-error" value="" vertex="1" parent="1" role="junction" logicalState="P2" style="ellipse;fillColor=#000000;strokeColor=#000000;strokeWidth=1;">
+          <mxGeometry x="432" y="749.5" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="fork-PP" value="" vertex="1" parent="1" role="junction" logicalState="PP" style="ellipse;fillColor=#000000;strokeColor=#000000;strokeWidth=1;">
+          <mxGeometry x="397" y="3114.5" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="C" value="C" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="C" role="state" entryActions="[]">
+          <mxGeometry x="250.0" y="3467.4" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="DV" value="DV" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="DV" role="state" entryActions="[]">
+          <mxGeometry x="250.0" y="3665.2" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="CM" value="CM" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="CM" role="state" entryActions="[]">
+          <mxGeometry x="250.0" y="3854.4" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="CB" value="CB" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="CB" role="state" entryActions="[]">
+          <mxGeometry x="250.0" y="4121.0" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="V" value="V" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="V" role="state" entryActions="[]">
+          <mxGeometry x="250.0" y="4327.4" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="OP" value="z≠0" style="rhombus;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=40;fontStyle=2;" vertex="1" parent="1" logicalState="OP" role="state" entryActions="[]">
+          <mxGeometry x="632.0" y="4457.0" width="116" height="116" as="geometry"/>
+        </mxCell>
+        <mxCell id="ER" value="ER" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="ER" role="state" entryActions="[]">
+          <mxGeometry x="640.0" y="4594.0" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="dispatch-M08" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="fanPort" entryActions="[]">
+          <mxGeometry x="79.995" y="3457.1949999999997" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="M08" value="" edge="1" parent="1" source="dispatch-M08" target="C" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="H" logicalTarget="C" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;{&quot;}" actions="[&quot;gc&quot;]" condition="'{'" action="gc">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="88" y="3487.2999999999997"/>
+              <mxPoint x="140" y="3517.4"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="M08-cond" value="'{'" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="85.0" y="3474.18" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="M08-act" value="gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="76.0" y="3519.7599999999998" width="220" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="dispatch-M09" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="fanPort" entryActions="[]">
+          <mxGeometry x="79.995" y="3654.995" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="M09" value="" edge="1" parent="1" source="dispatch-M09" target="DV" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="H" logicalTarget="DV" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;:&quot;}" actions="[&quot;gc&quot;]" condition="':'" action="gc">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="88" y="3685.1"/>
+              <mxPoint x="140" y="3715.2"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="M09-cond" value="':'" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="85.0" y="3671.98" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="M09-act" value="gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="76.0" y="3717.56" width="220" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="dispatch-M10" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="fanPort" entryActions="[]">
+          <mxGeometry x="79.995" y="3844.1949999999997" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="M10" value="" edge="1" parent="1" source="dispatch-M10" target="CM" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="H" logicalTarget="CM" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;&lt;&quot;}" actions="[&quot;gc&quot;]" condition="'&lt;'" action="gc">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="88" y="3874.2999999999997"/>
+              <mxPoint x="140" y="3904.4"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="M10-cond" value="'&lt;'" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="85.0" y="3861.18" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="M10-act" value="gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="76.0" y="3906.7599999999998" width="220" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="dispatch-M11" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="fanPort" entryActions="[]">
+          <mxGeometry x="79.995" y="4110.795" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="M11" value="" edge="1" parent="1" source="dispatch-M11" target="CB" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="H" logicalTarget="CB" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;&gt;&quot;}" actions="[&quot;gc&quot;]" condition="'&gt;'" action="gc">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="88" y="4140.9"/>
+              <mxPoint x="140" y="4171.0"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="M11-cond" value="'&gt;'" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="85.0" y="4127.78" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="M11-act" value="gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="76.0" y="4173.36" width="220" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="loop-M22-a" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="C" role="loopPort" entryActions="[]">
+          <mxGeometry x="399.995" y="3517.395" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="loop-M22-b" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="C" role="loopPort" entryActions="[]">
+          <mxGeometry x="199.995" y="3517.395" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="M22" value="" edge="1" parent="1" source="loop-M22-a" target="loop-M22-b" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;curved=1;" logicalSource="C" logicalTarget="C" guard="{&quot;type&quot;: &quot;not_chars&quot;, &quot;chars&quot;: &quot;}&quot;, &quot;exclude_eof&quot;: true}" actions="[&quot;gc&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="455" y="3418.5"/>
+              <mxPoint x="145" y="3418.5"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="M22-act" value="gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="150.0" y="3424.2999999999997" width="300" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="return-M20" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="returnPort" entryActions="[]">
+          <mxGeometry x="1659.995" y="3517.395" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="M20" value="" edge="1" parent="1" source="C" target="return-M20" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="C" logicalTarget="H" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;}&quot;}" actions="[&quot;gc&quot;]" condition="'}'" action="gc">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="M20-cond" value="'}'" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=26;spacing=0;">
+          <mxGeometry x="370.0" y="3475.9" width="180" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="M20-act" value="gc" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1225.0" y="3518.9" width="430" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="copy-M21" value="ER" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;" vertex="1" parent="1" logicalState="ER" role="connector" entryActions="[]">
+          <mxGeometry x="490.0" y="3549.1" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="M21" value="" edge="1" parent="1" source="C" target="copy-M21" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.8;exitY=0.9;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="C" logicalTarget="ER" guard="{&quot;type&quot;: &quot;eof&quot;}" actions="[&quot;error:COMMENT&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="M21-cond" value="EOF" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="380.0" y="3535.24" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="return-M23" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="returnPort" entryActions="[]">
+          <mxGeometry x="1659.995" y="3715.1949999999997" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="M23" value="" edge="1" parent="1" source="DV" target="return-M23" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="DV" logicalTarget="H" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;=&quot;}" actions="[&quot;gc&quot;, &quot;out:2:13&quot;]" condition="'='" action="gc, out(2,13)">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="M23-cond" value="'='" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=26;spacing=0;">
+          <mxGeometry x="370.0" y="3673.7" width="180" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="M23-act" value="gc, out(2,13)" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1225.0" y="3716.7" width="430" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="return-M25" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="returnPort" entryActions="[]">
+          <mxGeometry x="1659.995" y="3904.395" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="M25" value="" edge="1" parent="1" source="CM" target="return-M25" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="CM" logicalTarget="H" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;=&quot;}" actions="[&quot;gc&quot;, &quot;out:2:4&quot;]" condition="'='" action="gc, out(2,4)">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="M25-cond" value="'='" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=26;spacing=0;">
+          <mxGeometry x="370.0" y="3862.9" width="180" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="M25-act" value="gc, out(2,4)" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1225.0" y="3905.9" width="430" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="return-M26" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="returnPort" entryActions="[]">
+          <mxGeometry x="1659.995" y="3986.095" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="M26" value="" edge="1" parent="1" source="CM" target="return-M26" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.8;exitY=0.9;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="CM" logicalTarget="H" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;&gt;&quot;}" actions="[&quot;gc&quot;, &quot;out:2:1&quot;]" condition="'&gt;'" action="gc, out(2,1)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="330.0" y="3986.1"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="M26-cond" value="'&gt;'" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=26;spacing=0;">
+          <mxGeometry x="370.0" y="3944.6" width="180" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="M26-act" value="gc, out(2,1)" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1225.0" y="3987.6" width="430" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="return-M28" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="returnPort" entryActions="[]">
+          <mxGeometry x="1659.995" y="4170.995" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="M28" value="" edge="1" parent="1" source="CB" target="return-M28" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="CB" logicalTarget="H" guard="{&quot;type&quot;: &quot;chars&quot;, &quot;chars&quot;: &quot;=&quot;}" actions="[&quot;gc&quot;, &quot;out:2:6&quot;]" condition="'='" action="gc, out(2,6)">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="M28-cond" value="'='" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=26;spacing=0;">
+          <mxGeometry x="370.0" y="4129.5" width="180" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="M28-act" value="gc, out(2,6)" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1225.0" y="4172.5" width="430" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="return-M24" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="returnPort" entryActions="[]">
+          <mxGeometry x="1659.995" y="3796.895" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="M24" value="" edge="1" parent="1" source="DV" target="return-M24" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="DV" logicalTarget="H" guard="{&quot;type&quot;: &quot;not_chars&quot;, &quot;chars&quot;: &quot;=&quot;}" actions="[&quot;out:2:12&quot;]" condition="" action="out(2,12)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="300.0" y="3796.9"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="M24-act" value="out(2,12)" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1225.0" y="3798.4" width="430" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="return-M27" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="returnPort" entryActions="[]">
+          <mxGeometry x="1659.995" y="4067.7949999999996" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="M27" value="" edge="1" parent="1" source="CM" target="return-M27" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="CM" logicalTarget="H" guard="{&quot;type&quot;: &quot;not_chars&quot;, &quot;chars&quot;: &quot;=&gt;&quot;}" actions="[&quot;out:2:3&quot;]" condition="" action="out(2,3)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="300.0" y="4067.7999999999997"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="M27-act" value="out(2,3)" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1225.0" y="4069.2999999999997" width="430" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="return-M29" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="returnPort" entryActions="[]">
+          <mxGeometry x="1659.995" y="4252.695" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="M29" value="" edge="1" parent="1" source="CB" target="return-M29" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="CB" logicalTarget="H" guard="{&quot;type&quot;: &quot;not_chars&quot;, &quot;chars&quot;: &quot;=&quot;}" actions="[&quot;out:2:5&quot;]" condition="" action="out(2,5)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="300.0" y="4252.7"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="M29-act" value="out(2,5)" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1225.0" y="4254.2" width="430" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="dispatch-M12" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="fanPort" entryActions="[]">
+          <mxGeometry x="79.995" y="4317.195" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="M12" value="" edge="1" parent="1" source="dispatch-M12" target="V" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=0.5;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="H" logicalTarget="V" guard="{&quot;type&quot;: &quot;eof&quot;}" actions="[]" condition="EOF" action="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="88" y="4347.3"/>
+              <mxPoint x="140" y="4377.4"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="M12-cond" value="EOF" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="85.0" y="4334.18" width="130" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="M13" value="" edge="1" parent="1" source="H" target="OP" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0;entryY=0.5;entryPerimeter=1;" logicalSource="H" logicalTarget="OP" guard="{&quot;type&quot;: &quot;H_other&quot;}" actions="[&quot;nill&quot;, &quot;add&quot;, &quot;look_TL&quot;]" condition="" action="nill, add, look(TL)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="80" y="4515.0"/>
+              <mxPoint x="190" y="4515.0"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="M13-act" value="nill, add, look(TL)" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=27;spacing=0;">
+          <mxGeometry x="76.0" y="4517.36" width="220" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="return-M18" value="" style="ellipse;html=0;whiteSpace=wrap;aspect=fixed;fillColor=#ffffff;strokeColor=#000000;strokeWidth=1.6;fontFamily=Times New Roman;fontSize=46;fontStyle=2;opacity=0;" vertex="1" parent="1" logicalState="H" role="returnPort" entryActions="[]">
+          <mxGeometry x="1659.995" y="4514.995" width="0.01" height="0.01" as="geometry"/>
+        </mxCell>
+        <mxCell id="M18" value="" edge="1" parent="1" source="OP" target="H" style="endArrow=none;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=1;exitY=0.5;exitPerimeter=1;entryX=1;entryY=0.5;entryPerimeter=1;" logicalSource="OP" logicalTarget="H" guard="{&quot;type&quot;: &quot;z_nonzero&quot;}" actions="[&quot;gc&quot;, &quot;out:2&quot;]" condition="+" action="gc, out(2,z)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1660" y="4515.0"/>
+              <mxPoint x="1660" y="38.7"/>
+              <mxPoint x="200" y="38.7"/>
+              <mxPoint x="200" y="103.2"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="M18-cond" value="+" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=26;spacing=0;">
+          <mxGeometry x="760.0" y="4473.5" width="180" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="M18-act" value="gc, out(2,z)" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=30;spacing=0;">
+          <mxGeometry x="1225.0" y="4516.5" width="430" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="M19" value="" edge="1" parent="1" source="OP" target="ER" style="endArrow=open;endFill=0;endSize=12;startArrow=none;strokeColor=#000000;strokeWidth=1.6;rounded=1;arcSize=160;html=0;exitX=0.5;exitY=1;exitPerimeter=1;entryX=0.5;entryY=0;entryPerimeter=1;" logicalSource="OP" logicalTarget="ER" guard="{&quot;type&quot;: &quot;z_zero&quot;}" actions="[&quot;error:CHAR&quot;]" condition="" action="">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="M19-cond" value="−" vertex="1" parent="1" role="label" style="text;html=0;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=2;fontSize=32;spacing=0;">
+          <mxGeometry x="700.0" y="4563.8" width="100" height="40" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
