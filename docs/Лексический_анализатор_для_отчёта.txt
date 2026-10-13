@@ -869,9 +869,9 @@ class Lexer:
         elif self.CS == 'DV':
             if self.CH != EOF and self.CH in '=':
                 # M23: DV -> H
-                self._record('M23', 'H', 'gc, out:2:13')
-                self.gc()
+                self._record('M23', 'H', 'out:2:13, gc')
                 self.out(2, 13)
+                self.gc()
                 self.CS = 'H'
             else:
                 # M24: DV -> H
@@ -882,15 +882,15 @@ class Lexer:
         elif self.CS == 'CM':
             if self.CH != EOF and self.CH in '=':
                 # M25: CM -> H
-                self._record('M25', 'H', 'gc, out:2:4')
-                self.gc()
+                self._record('M25', 'H', 'out:2:4, gc')
                 self.out(2, 4)
+                self.gc()
                 self.CS = 'H'
             elif self.CH != EOF and self.CH in '>':
                 # M26: CM -> H
-                self._record('M26', 'H', 'gc, out:2:1')
-                self.gc()
+                self._record('M26', 'H', 'out:2:1, gc')
                 self.out(2, 1)
+                self.gc()
                 self.CS = 'H'
             else:
                 # M27: CM -> H
@@ -901,9 +901,9 @@ class Lexer:
         elif self.CS == 'CB':
             if self.CH != EOF and self.CH in '=':
                 # M28: CB -> H
-                self._record('M28', 'H', 'gc, out:2:6')
-                self.gc()
+                self._record('M28', 'H', 'out:2:6, gc')
                 self.out(2, 6)
+                self.gc()
                 self.CS = 'H'
             else:
                 # M29: CB -> H
@@ -914,9 +914,9 @@ class Lexer:
         elif self.CS == 'OP':
             if self.z != 0:
                 # M18: OP -> H
-                self._record('M18', 'H', 'gc, out:2')
-                self.gc()
+                self._record('M18', 'H', 'out:2, gc')
                 self.out(2, self.z)
+                self.gc()
                 self.CS = 'H'
             else:
                 # M19: OP -> ER
