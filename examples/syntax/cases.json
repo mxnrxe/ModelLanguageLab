@@ -1,0 +1,401 @@
+[
+  {
+    "file": "valid/01_report.txt",
+    "ok": true,
+    "rule": "",
+    "issue": "",
+    "title": "Программа из отчёта"
+  },
+  {
+    "file": "valid/02_all_constructs.txt",
+    "ok": true,
+    "rule": "",
+    "issue": "",
+    "title": "Все конструкции языка"
+  },
+  {
+    "file": "valid/03_nested_if.txt",
+    "ok": true,
+    "rule": "",
+    "issue": "",
+    "title": "Вложенные if / else"
+  },
+  {
+    "file": "valid/04_comments.txt",
+    "ok": true,
+    "rule": "",
+    "issue": "",
+    "title": "Комментарии"
+  },
+  {
+    "file": "valid/05_relations.txt",
+    "ok": true,
+    "rule": "",
+    "issue": "",
+    "title": "Операции отношения"
+  },
+  {
+    "file": "valid/06_nested_loops.txt",
+    "ok": true,
+    "rule": "",
+    "issue": "",
+    "title": "Вложенные циклы"
+  },
+  {
+    "file": "valid/07_temperature_newlines.txt",
+    "ok": true,
+    "rule": "",
+    "issue": "",
+    "title": "Переносы строк — перевод температуры"
+  },
+  {
+    "file": "valid/08_while_newlines.txt",
+    "ok": true,
+    "rule": "",
+    "issue": "",
+    "title": "Переносы строк — сумма с while"
+  },
+  {
+    "file": "valid/09_for_newlines.txt",
+    "ok": true,
+    "rule": "",
+    "issue": "",
+    "title": "Переносы строк — цикл for с шагом"
+  },
+  {
+    "file": "valid/10_if_newlines.txt",
+    "ok": true,
+    "rule": "",
+    "issue": "",
+    "title": "Переносы строк — условие и блоки"
+  },
+  {
+    "file": "invalid/01_empty.txt",
+    "ok": false,
+    "rule": "St",
+    "issue": "Пустая программа",
+    "group": "Структура программы"
+  },
+  {
+    "file": "invalid/02_only_end.txt",
+    "ok": false,
+    "rule": "St",
+    "issue": "Нет конструкции перед end",
+    "group": "Структура программы"
+  },
+  {
+    "file": "invalid/03_missing_end.txt",
+    "ok": false,
+    "rule": "Pr",
+    "issue": "Нет end",
+    "group": "Структура программы"
+  },
+  {
+    "file": "invalid/04_after_end.txt",
+    "ok": false,
+    "rule": "Pr",
+    "issue": "Лексемы после end",
+    "group": "Структура программы"
+  },
+  {
+    "file": "invalid/05_missing_separator.txt",
+    "ok": false,
+    "rule": "Sep",
+    "issue": "Нет разделителя перед end",
+    "group": "Структура программы"
+  },
+  {
+    "file": "invalid/06_double_separator.txt",
+    "ok": false,
+    "rule": "St",
+    "issue": "Два разделителя подряд",
+    "group": "Структура программы"
+  },
+  {
+    "file": "invalid/07_leading_newline.txt",
+    "ok": false,
+    "rule": "St",
+    "issue": "Перенос перед первой конструкцией",
+    "group": "Структура программы"
+  },
+  {
+    "file": "invalid/08_trailing_newline.txt",
+    "ok": false,
+    "rule": "Pr",
+    "issue": "Перенос после end",
+    "group": "Структура программы"
+  },
+  {
+    "file": "invalid/09_missing_identifier.txt",
+    "ok": false,
+    "rule": "Id",
+    "issue": "Нет имени в описании",
+    "group": "Объявления"
+  },
+  {
+    "file": "invalid/10_comma_in_declaration.txt",
+    "ok": false,
+    "rule": "Id",
+    "issue": "Нет имени после запятой",
+    "group": "Объявления"
+  },
+  {
+    "file": "invalid/11_missing_type.txt",
+    "ok": false,
+    "rule": "Tp",
+    "issue": "Нет обозначения типа",
+    "group": "Объявления"
+  },
+  {
+    "file": "invalid/12_assignment_sign.txt",
+    "ok": false,
+    "rule": "Asg",
+    "issue": "Нужно :=, а не =",
+    "group": "Присваивания и выражения"
+  },
+  {
+    "file": "invalid/13_missing_expression.txt",
+    "ok": false,
+    "rule": "Mn",
+    "issue": "Нет выражения",
+    "group": "Присваивания и выражения"
+  },
+  {
+    "file": "invalid/14_unary_minus.txt",
+    "ok": false,
+    "rule": "Mn",
+    "issue": "Унарный минус не задан грамматикой",
+    "group": "Присваивания и выражения"
+  },
+  {
+    "file": "invalid/15_missing_operand.txt",
+    "ok": false,
+    "rule": "Mn",
+    "issue": "Нет операнда после операции",
+    "group": "Присваивания и выражения"
+  },
+  {
+    "file": "invalid/16_extra_operand.txt",
+    "ok": false,
+    "rule": "Sep",
+    "issue": "Пропущена операция",
+    "group": "Присваивания и выражения"
+  },
+  {
+    "file": "invalid/17_missing_round_close.txt",
+    "ok": false,
+    "rule": "Mn",
+    "issue": "Нет закрывающей круглой скобки",
+    "group": "Присваивания и выражения"
+  },
+  {
+    "file": "invalid/18_empty_parentheses.txt",
+    "ok": false,
+    "rule": "Mn",
+    "issue": "Пустое выражение",
+    "group": "Присваивания и выражения"
+  },
+  {
+    "file": "invalid/19_empty_block.txt",
+    "ok": false,
+    "rule": "St",
+    "issue": "Составной оператор не может быть пустым",
+    "group": "Составные операторы"
+  },
+  {
+    "file": "invalid/20_block_close.txt",
+    "ok": false,
+    "rule": "St",
+    "issue": "Внутри блока end вместо оператора после разделителя",
+    "group": "Составные операторы"
+  },
+  {
+    "file": "invalid/21_block_trailing_separator.txt",
+    "ok": false,
+    "rule": "St",
+    "issue": "Разделитель перед ]",
+    "group": "Составные операторы"
+  },
+  {
+    "file": "invalid/22_block_leading_newline.txt",
+    "ok": false,
+    "rule": "St",
+    "issue": "Перенос сразу после [",
+    "group": "Составные операторы"
+  },
+  {
+    "file": "invalid/23_declaration_in_block.txt",
+    "ok": false,
+    "rule": "St",
+    "issue": "Описание не является оператором блока",
+    "group": "Составные операторы"
+  },
+  {
+    "file": "invalid/24_if_open.txt",
+    "ok": false,
+    "rule": "Cond",
+    "issue": "Нет ( после if",
+    "group": "Условия"
+  },
+  {
+    "file": "invalid/25_if_close.txt",
+    "ok": false,
+    "rule": "Cond",
+    "issue": "Нет ) в условии",
+    "group": "Условия"
+  },
+  {
+    "file": "invalid/26_if_body.txt",
+    "ok": false,
+    "rule": "St",
+    "issue": "Нет тела if",
+    "group": "Условия"
+  },
+  {
+    "file": "invalid/27_else_body.txt",
+    "ok": false,
+    "rule": "St",
+    "issue": "Нет тела else",
+    "group": "Условия"
+  },
+  {
+    "file": "invalid/28_orphan_else.txt",
+    "ok": false,
+    "rule": "St",
+    "issue": "else без if",
+    "group": "Условия"
+  },
+  {
+    "file": "invalid/29_before_else.txt",
+    "ok": false,
+    "rule": "St",
+    "issue": "Разделитель перед else завершил if",
+    "group": "Условия"
+  },
+  {
+    "file": "invalid/30_for_to.txt",
+    "ok": false,
+    "rule": "ForSt",
+    "issue": "Нет to",
+    "group": "Циклы"
+  },
+  {
+    "file": "invalid/31_for_next.txt",
+    "ok": false,
+    "rule": "ForSt",
+    "issue": "Нет next",
+    "group": "Циклы"
+  },
+  {
+    "file": "invalid/32_for_step.txt",
+    "ok": false,
+    "rule": "Mn",
+    "issue": "Нет выражения шага",
+    "group": "Циклы"
+  },
+  {
+    "file": "invalid/33_for_assignment.txt",
+    "ok": false,
+    "rule": "Asg",
+    "issue": "Ошибочное присваивание параметру",
+    "group": "Циклы"
+  },
+  {
+    "file": "invalid/34_while_open.txt",
+    "ok": false,
+    "rule": "WhileSt",
+    "issue": "Нет ( после while",
+    "group": "Циклы"
+  },
+  {
+    "file": "invalid/35_while_close.txt",
+    "ok": false,
+    "rule": "WhileSt",
+    "issue": "Нет ) в while",
+    "group": "Циклы"
+  },
+  {
+    "file": "invalid/36_readln_number.txt",
+    "ok": false,
+    "rule": "Id",
+    "issue": "На вводе нужно имя",
+    "group": "Ввод и вывод"
+  },
+  {
+    "file": "invalid/37_readln_comma.txt",
+    "ok": false,
+    "rule": "Id",
+    "issue": "Пустой элемент списка ввода",
+    "group": "Ввод и вывод"
+  },
+  {
+    "file": "invalid/38_writeln_empty.txt",
+    "ok": false,
+    "rule": "Mn",
+    "issue": "Нет выражения вывода",
+    "group": "Ввод и вывод"
+  },
+  {
+    "file": "invalid/39_writeln_comma.txt",
+    "ok": false,
+    "rule": "Mn",
+    "issue": "Нет выражения после запятой",
+    "group": "Ввод и вывод"
+  },
+  {
+    "file": "invalid/40_writeln_parentheses.txt",
+    "ok": false,
+    "rule": "Mn",
+    "issue": "Список внутри скобок не является выражением",
+    "group": "Ввод и вывод"
+  },
+  {
+    "file": "invalid/41_block_missing_close.txt",
+    "ok": false,
+    "rule": "Cmp",
+    "issue": "Нет ]",
+    "group": "Составные операторы"
+  },
+  {
+    "file": "invalid/42_while_body.txt",
+    "ok": false,
+    "rule": "St",
+    "issue": "Нет тела while",
+    "group": "Циклы"
+  },
+  {
+    "file": "invalid/43_for_body.txt",
+    "ok": false,
+    "rule": "St",
+    "issue": "Нет тела for",
+    "group": "Циклы"
+  },
+  {
+    "file": "invalid/44_not_operand.txt",
+    "ok": false,
+    "rule": "Mn",
+    "issue": "Нет множителя после !",
+    "group": "Присваивания и выражения"
+  },
+  {
+    "file": "invalid/45_rel_operand.txt",
+    "ok": false,
+    "rule": "Mn",
+    "issue": "Нет операнда после отношения",
+    "group": "Присваивания и выражения"
+  },
+  {
+    "file": "invalid/46_mul_operand.txt",
+    "ok": false,
+    "rule": "Mn",
+    "issue": "Нет множителя после *",
+    "group": "Присваивания и выражения"
+  },
+  {
+    "file": "invalid/47_readln_parentheses.txt",
+    "ok": false,
+    "rule": "Id",
+    "issue": "Ввод задаётся без скобок",
+    "group": "Ввод и вывод"
+  }
+]

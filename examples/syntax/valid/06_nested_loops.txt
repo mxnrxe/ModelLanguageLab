@@ -1,0 +1,1 @@
+for i := 1 to 3 while (i < 3) [i := i + 1: if (i = 2) writeln i else writeln 0] next:end

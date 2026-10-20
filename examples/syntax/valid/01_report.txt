@@ -1,0 +1,5 @@
+dim q %
+readln q
+q := q + 1
+writeln q
+end

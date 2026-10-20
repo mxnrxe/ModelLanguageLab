@@ -6,13 +6,14 @@ from pathlib import Path
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
 from language.lexer import Lexer
+from language.parser import Parser
 from language.tables import TW, TL
 from language.numbers import display_value
 from .editor import CodeEditor
+from .syntax_panel import SyntaxPanel
 
 ROOT = Path(__file__).resolve().parents[1]
-DEMO = """{Пример: разные записи одного значения}
-dim x, y %
+DEMO = """dim x, y % {Пример: разные записи одного значения}
 dim rate !
 x := 101B: y := 5
 rate := .5E-2
@@ -34,6 +35,7 @@ class LabApp(tk.Tk):
         self.path = None
         self.saved_source = DEMO
         self.result = None
+        self.syntax_result = None
         self.version = 0
         self.busy = False
         self.messages = queue.Queue()
@@ -46,6 +48,7 @@ class LabApp(tk.Tk):
         self.bind("<Control-s>", lambda _: self.save_file())
         self.bind("<Control-Shift-S>", lambda _: self.save_file(True))
         self.bind("<F5>", lambda _: self.analyze())
+        self.bind("<F6>", lambda _: self.analyze_syntax())
         self.protocol("WM_DELETE_WINDOW", self.close)
         self.after(100, self._poll)
 
@@ -104,8 +107,6 @@ class LabApp(tk.Tk):
                                ("Сохранить", self.save_file), ("Сохранить как…", lambda: self.save_file(True)),
                                ("Примеры", self.show_examples), ("Экспорт", self.export)):
             ttk.Button(tools, text=label, command=command).pack(side="left", padx=(0, 7))
-        self.run_button = ttk.Button(tools, text="▶  Лексический анализ   F5", style="Accent.TButton", command=self.analyze)
-        self.run_button.pack(side="right")
         self.body = ttk.Panedwindow(self, orient="vertical")
         self.body.grid(row=2, column=0, sticky="nsew", padx=18)
         workspace = ttk.Frame(self.body)
@@ -124,8 +125,21 @@ class LabApp(tk.Tk):
         self.editor = CodeEditor(left, self.changed)
         self.editor.pack(fill="both", expand=True)
         self.views = {}
-        self.tabs = ttk.Notebook(right)
-        self.tabs.pack(fill="both", expand=True, padx=(8, 0))
+        actions = ttk.Frame(right, padding=(8, 0, 0, 8))
+        actions.pack(fill="x")
+        self.run_button = ttk.Button(actions, text="Лексический анализ  F5", command=self.analyze)
+        self.run_button.pack(side="left", padx=(0, 8))
+        self.syntax_button = ttk.Button(actions, text="▶  Проверить синтаксис  F6",
+                                        style="Accent.TButton", command=self.analyze_syntax)
+        self.syntax_button.pack(side="left")
+        self.stage_tabs = ttk.Notebook(right)
+        self.stage_tabs.pack(fill="both", expand=True, padx=(8, 0))
+        lexical_page = ttk.Frame(self.stage_tabs)
+        self.stage_tabs.add(lexical_page, text="Лексический анализ")
+        self.syntax_panel = SyntaxPanel(self.stage_tabs, self.show_error)
+        self.stage_tabs.add(self.syntax_panel, text="Синтаксический анализ")
+        self.tabs = ttk.Notebook(lexical_page)
+        self.tabs.pack(fill="both", expand=True)
         overview = ttk.Frame(self.tabs)
         statics = ttk.Frame(self.tabs)
         trace = ttk.Frame(self.tabs)
@@ -163,7 +177,7 @@ class LabApp(tk.Tk):
         sb = ttk.Scrollbar(chain_frame, command=self.chain.yview)
         sb.pack(side="right", fill="y")
         self.chain.configure(yscrollcommand=sb.set)
-        self.status = tk.StringVar(value="Готов к работе · Ctrl+N — новый файл · F5 — лексический анализ")
+        self.status = tk.StringVar(value="Готов к работе · Ctrl+N — новый файл · F5 — лексика · F6 — синтаксис")
         self.status_label = ttk.Label(self, textvariable=self.status, padding=(18, 9))
         self.status_label.grid(row=3, column=0, sticky="ew")
         self.status_label.bind("<Button-1>", lambda _: self.show_error())
@@ -199,8 +213,12 @@ class LabApp(tk.Tk):
 
     def changed(self):
         self.version += 1
+        had_syntax = self.syntax_result is not None
+        self.syntax_result = None
+        if had_syntax or self.busy:
+            self.syntax_panel.stale()
         if hasattr(self, "status"):
-            self.status.set("Текст изменён. Нажмите F5 для обновления результатов.")
+            self.status.set("Текст изменён · F5 — лексика · F6 — синтаксис")
         self._update_filename()
 
     def _update_filename(self):
@@ -255,37 +273,82 @@ class LabApp(tk.Tk):
         menu = tk.Menu(self, tearoff=False)
         for path in sorted((ROOT / "examples").glob("*.txt")):
             menu.add_command(label=path.stem, command=lambda p=path: self.load_path(p))
+        catalog = json.loads((ROOT / "examples" / "syntax" / "cases.json").read_text(encoding="utf-8"))
+        for folder, title in (("valid", "Синтаксис — корректные программы"),
+                              ("invalid", "Синтаксис — ошибки")):
+            submenu = tk.Menu(menu, tearoff=False)
+            groups = {}
+            for case in catalog:
+                if not case["file"].startswith(folder + "/"):
+                    continue
+                path = ROOT / "examples" / "syntax" / case["file"]
+                target = submenu
+                if folder == "invalid":
+                    group = case["group"]
+                    if group not in groups:
+                        groups[group] = tk.Menu(submenu, tearoff=False)
+                        submenu.add_cascade(label=group, menu=groups[group])
+                    target = groups[group]
+                target.add_command(label=case.get("title") or case["issue"],
+                                   command=lambda p=path: self.load_path(p))
+            menu.add_cascade(label=title, menu=submenu)
         menu.tk_popup(self.winfo_pointerx(), self.winfo_pointery())
 
     def clear_result(self):
         self.result = None
+        self.syntax_result = None
+        self.syntax_panel.reset()
+        self.editor.text.tag_remove("error", "1.0", "end")
         for key in ("tokens", "TI", "TN", "trace"):
             tree = self.views[key]
             tree.delete(*tree.get_children())
         self._set_chain("")
 
     def analyze(self):
+        self._start_analysis(False)
+
+    def analyze_syntax(self):
+        self._start_analysis(True)
+
+    def _start_analysis(self, syntax):
         if self.busy: return
         source, version = self.editor.source(), self.version
         self.busy = True
         self.run_button.configure(state="disabled")
+        self.syntax_button.configure(state="disabled")
+        self.stage_tabs.select(self.syntax_panel if syntax else 0)
         self.status.set("Анализирую программу…")
         def worker():
-            try: self.messages.put((version, Lexer().analyze(source), None))
-            except Exception as error: self.messages.put((version, None, error))
+            try:
+                lexical = Lexer().analyze(source)
+                parsed = Parser().analyze(lexical) if syntax else None
+                self.messages.put((version, lexical, parsed, None))
+            except Exception as error: self.messages.put((version, None, None, error))
         threading.Thread(target=worker, daemon=True).start()
 
     def _poll(self):
         try:
-            version, result, error = self.messages.get_nowait()
+            version, result, parsed, error = self.messages.get_nowait()
             self.busy = False
             self.run_button.configure(state="normal")
+            self.syntax_button.configure(state="normal")
             if version != self.version:
-                self.status.set("Текст изменился во время анализа. Нажмите F5 ещё раз.")
+                self.status.set("Текст изменился во время анализа. Запустите проверку ещё раз.")
             elif error:
                 self.status.set("Внутренняя ошибка анализатора")
                 messagebox.showerror("Ошибка", str(error), parent=self)
-            else: self.render_result(result)
+            else:
+                self.render_result(result)
+                if parsed is not None:
+                    self.syntax_result = parsed
+                    self.syntax_panel.render(parsed, result.source)
+                    if parsed.ok:
+                        self.status.set(f"✓ Синтаксис верен · проверено {parsed.total} лексем")
+                    else:
+                        d = parsed.diagnostics[0]
+                        self.editor.mark("error", d.start, d.end)
+                        self.editor.text.see(f"1.0+{d.start}c")
+                        self.status.set(f"Ошибка {d.line}:{d.column} · {d.message} · нажмите для перехода")
         except queue.Empty: pass
         self.after(100, self._poll)
 
@@ -337,6 +400,11 @@ class LabApp(tk.Tk):
             self.editor.text.see(f"{step.line}.{step.column - 1}")
 
     def show_error(self):
+        if self._fresh() and self.syntax_result and self.syntax_result.diagnostics:
+            d = self.syntax_result.diagnostics[0]
+            self.editor.select_span(d.start, d.end)
+            self.editor.text.focus_set()
+            return
         if self._fresh() and self.result.diagnostics:
             d = self.result.diagnostics[0]
             self.editor.select_span(d.start, d.end)
@@ -358,8 +426,24 @@ class LabApp(tk.Tk):
         if not self._fresh():
             messagebox.showinfo("Экспорт", "Сначала выполните анализ текущего текста (F5).", parent=self)
             return
-        name = filedialog.asksaveasfilename(parent=self, title="Экспорт результата", defaultextension=".json", filetypes=[("Результат JSON", "*.json"), ("Цепочка лексем", "*.txt")])
+        syntax = self.stage_tabs.select() == str(self.syntax_panel)
+        if syntax and self.syntax_result is None:
+            messagebox.showinfo("Экспорт", "Сначала проверьте синтаксис (F6).", parent=self)
+            return
+        name = filedialog.asksaveasfilename(parent=self, title="Экспорт результата", defaultextension=".json", filetypes=[("Результат JSON", "*.json"), ("Заключение" if syntax else "Цепочка лексем", "*.txt")])
         if not name: return
+        if syntax:
+            r = self.syntax_result
+            data = {"phase": "syntax", "ok": r.ok, "source": self.result.source,
+                    "consumed": r.consumed, "total": r.total,
+                    "diagnostics": [vars(d) for d in r.diagnostics]}
+            text = ("Синтаксис верен" if r.ok else "\n".join(
+                f"{d.line}:{d.column} · {d.rule} · {d.message}" for d in r.diagnostics))
+            try:
+                Path(name).write_text(text if name.lower().endswith(".txt") else
+                                      json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+            except OSError as error: messagebox.showerror("Экспорт", str(error), parent=self)
+            return
         r = self.result
         data = {"ok": r.ok, "source": r.source, "chain": r.chain, "TW": TW,
             "TL": [("/n" if word == "NL" else word, meaning) for word, meaning in TL],

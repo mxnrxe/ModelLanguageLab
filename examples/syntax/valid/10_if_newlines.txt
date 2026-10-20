@@ -1,0 +1,7 @@
+dim a, b %
+readln a, b
+if (a > b) [writeln a
+writeln a - b] else [writeln b
+writeln b - a]
+writeln a, b
+end

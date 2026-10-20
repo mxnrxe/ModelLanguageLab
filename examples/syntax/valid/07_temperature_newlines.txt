@@ -1,0 +1,5 @@
+dim c, f !
+readln c
+f := c * 9 / 5 + 32
+writeln f
+end
