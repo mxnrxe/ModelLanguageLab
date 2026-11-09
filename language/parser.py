@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 
 from .models import AnalysisResult, Token
 from .tables import TW, TL
@@ -40,12 +40,6 @@ class _ParseError(Exception):
 
 
 class Parser:
-    """Один метод на синтаксический нетерминал; Id и Nb — готовые лексемы.
-
-    Пробелы и комментарии уже обработаны лексером. /n — терминал Sep,
-    его нельзя произвольно пропускать. После end не допускаются лексемы.
-    else относится к ближайшему ещё не завершённому if.
-    """
 
     def analyze(self, lexical: AnalysisResult) -> SyntaxResult:
         self.tokens = lexical.tokens
@@ -90,19 +84,34 @@ class Parser:
     def one_of(self, *symbols) -> bool:
         return any(self.EQ(symbol) for symbol in symbols)
 
-    def error(self, rule, *expected, message=None, phase="syntax"):
-        token = self.LEX
+    def error(self, rule, *expected, message=None, phase="syntax", token=None):
+        token = self.LEX if token is None else token
         found = ("конец файла" if token.table == 0 else
-                 "/n" if self.EQ("/n") else token.text)
+                 "/n" if (token.table, token.index) == PAIRS["/n"] else token.text)
         choices = ", ".join(f"«{item}»" for item in expected)
         text = message or f"Ожидалось: {choices}. Получено: «{found}»."
         raise _ParseError(SyntaxDiagnostic(text, rule, tuple(expected), found,
                                            token.start, token.end, token.line, token.column, phase))
 
-    def take(self, symbol, rule):
+    def take(self, symbol, rule, message=None):
         if not self.EQ(symbol):
-            self.error(rule, symbol)
+            self.error(rule, symbol, message=message)
         self.gl()
+
+    def missing_close(self, symbol, opening):
+        return (f"Не закрыта скобка «{opening.text}», открытая в строке {opening.line}, "
+                f"столбце {opening.column}. Ожидалась «{symbol}».")
+
+    def statement(self, context):
+        """Уточнить только отсутствие оператора, сохраняя ошибки внутри его тела."""
+        start = self.position
+        try:
+            self.St()
+        except _ParseError as error:
+            d = error.diagnostic
+            if d.phase == "syntax" and d.rule == "St" and self.position == start:
+                error.diagnostic = replace(d, message=f"{context}. Получено: «{d.found}».")
+            raise
 
     def enter(self, rule):
         # Ограничение реализации, а не ограничение грамматики.
@@ -183,62 +192,86 @@ class Parser:
 
     def Cmp(self):
         """Cmp → [ St CmpL ]; пустой блок и разделитель перед ] запрещены."""
+        opening = self.LEX
         self.take("[", "Cmp")
-        self.St()
-        self.CmpL()
-        self.take("]", "Cmp")
+        self.statement("После «[» требуется оператор; пустой блок недопустим")
+        self.CmpL(opening)
+        self.take("]", "Cmp", self.missing_close("]", opening))
 
-    def CmpL(self):
+    def CmpL(self, opening):
         """CmpL → ε | CmpL Sep St; эквивалентно { Sep St }."""
         while self.one_of(":", "/n"):
             self.Sep()
-            self.St()
+            if self.LEX.table == 0 or self.one_of("end", "else", "next"):
+                self.error("Cmp", "]", message=self.missing_close("]", opening))
+            context = ("Разделитель перед «]» недопустим; после разделителя требуется оператор"
+                       if self.EQ("]") else "После разделителя в блоке требуется оператор")
+            self.statement(context)
 
     def Asg(self):
         self.Id()
         self.take(":=", "Asg")
-        self.Ex()
+        self.Ex("После «:=» ожидается выражение для присваивания")
 
     def Cond(self):
         self.take("if", "Cond")
-        self.take("(", "Cond")
-        self.Ex()
-        self.take(")", "Cond")
-        self.St()
+        opening = self.LEX
+        self.take("(", "Cond", "После «if» требуется условие в круглых скобках: «( ... )».")
+        self.Ex("В скобках после «if» ожидается выражение условия")
+        self.take(")", "Cond", self.missing_close(")", opening))
+        self.statement("После условия «if» требуется оператор его тела")
         if self.EQ("else"):
             self.gl()
-            self.St()
+            self.statement("После «else» требуется оператор его ветви")
 
     def ForSt(self):
         self.take("for", "ForSt")
         self.Asg()
         self.take("to", "ForSt")
-        self.Ex()
+        self.Ex("После «to» ожидается выражение границы цикла")
         if self.EQ("step"):
             self.gl()
-            self.Ex()
-        self.St()
+            start = self.position
+            self.Ex("После «step» ожидается выражение шага цикла")
+            # ID допустим как шаг, но ID := начинает присваивание тела.
+            # Уточняем уже ошибочный случай, не ограничивая допустимые выражения.
+            if self.position == start + 1 and self.tokens[start].table == 3 and self.EQ(":="):
+                name = self.tokens[start].text
+                self.error("St", "выражение шага после step",
+                           message=(f"После «step» пропущено выражение шага перед "
+                                    f"присваиванием «{name} :=». Укажите шаг, например: "
+                                    f"«step 1 {name} := ...»; шагом также может быть "
+                                    "идентификатор или составное выражение."),
+                           token=self.tokens[start])
+        self.statement("В цикле «for» после границы и шага требуется оператор тела")
         self.take("next", "ForSt")
 
     def WhileSt(self):
         self.take("while", "WhileSt")
-        self.take("(", "WhileSt")
-        self.Ex()
-        self.take(")", "WhileSt")
-        self.St()
+        opening = self.LEX
+        self.take("(", "WhileSt", "После «while» требуется условие в круглых скобках: «( ... )».")
+        self.Ex("В скобках после «while» ожидается выражение условия")
+        self.take(")", "WhileSt", self.missing_close(")", opening))
+        self.statement("После условия «while» требуется оператор тела цикла")
 
     def ExL(self):
-        self.Ex()
+        self.Ex("После «writeln» ожидается выражение для вывода")
         while self.EQ(","):
             self.gl()
-            self.Ex()
+            self.Ex("После запятой в «writeln» ожидается следующее выражение")
 
-    def Ex(self):
+    def Ex(self, context=None):
         """Ex → Op | Ex Rel Op; допускается несколько отношений."""
-        self.Op()
-        while self.one_of("<>", "=", "<", "<=", ">", ">="):
-            self.Rel()
+        try:
             self.Op()
+            while self.one_of("<>", "=", "<", "<=", ">", ">="):
+                self.Rel()
+                self.Op()
+        except _ParseError as error:
+            d = error.diagnostic
+            if context and d.phase == "syntax" and d.rule == "Mn":
+                error.diagnostic = replace(d, message=f"{context}. {d.message}")
+            raise
 
     def Rel(self):
         if not self.one_of("<>", "=", "<", "<=", ">", ">="):
@@ -283,11 +316,20 @@ class Parser:
                 self.gl()
                 self.Mn()
             elif self.EQ("("):
+                opening = self.LEX
                 self.gl()
                 self.Ex()
-                self.take(")", "Mn")
+                self.take(")", "Mn", self.missing_close(")", opening))
             else:
-                self.error("Mn", "идентификатор", "число", "true", "false", "!", "(")
+                previous = self.tokens[self.position - 1] if self.position else None
+                operator = (SYMBOLS.get((previous.table, previous.index))
+                            if previous is not None else None)
+                message = (f"После оператора «{operator}» ожидается операнд "
+                           "(идентификатор, число, true, false, ! или выражение в скобках)."
+                           if operator in ("+", "-", "or", "*", "/", "and", "<>", "=",
+                                           "<", "<=", ">", ">=", "!") else None)
+                self.error("Mn", "идентификатор", "число", "true", "false", "!", "(",
+                           message=message)
         finally:
             self.depth -= 1
 
