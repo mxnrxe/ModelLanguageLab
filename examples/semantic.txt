@@ -1,0 +1,9 @@
+dim a, b, c %
+dim ratio !
+dim flag $
+a := 2: b := 3
+c := a + 5 * b
+ratio := c / b
+flag := c > b
+if (flag) writeln c, ratio else writeln b
+end

@@ -53,7 +53,7 @@ class SyntaxPanel(ttk.Frame):
 
     def reset(self):
         self.heading.configure(text="Проверьте структуру программы", foreground="#3159a3")
-        self.summary.configure(text="Редактор и файлы общие для обеих вкладок. Нажмите F6.")
+        self.summary.configure(text="Редактор и файлы общие для всех этапов. Нажмите F6.")
         self.go.configure(state="disabled")
         self.write("Проверка методом рекурсивного спуска\n"
                    "Анализатор получает цепочку лексем и проверяет конструкции по грамматике ЛР1. "

@@ -26,7 +26,7 @@ try:
     wait(app)
     assert app.result.ok and app.syntax_result.ok
     assert app.stage_tabs.select() == str(app.syntax_panel)
-    assert len(app.stage_tabs.tabs()) == 2 and len(app.tabs.tabs()) == 3
+    assert len(app.stage_tabs.tabs()) == 3 and len(app.tabs.tabs()) == 3
     assert str(app.syntax_panel.go['state']) == 'disabled'
     text = app.editor.source()
     app.stage_tabs.select(0)
@@ -38,6 +38,29 @@ try:
             app.export()
         data = json.loads(exported.read_text(encoding='utf-8'))
         assert data['phase'] == 'syntax' and data['ok']
+
+        source = Path(__file__).resolve().parents[1] / 'examples' / 'semantic.txt'
+        app.editor.set_source(source.read_text(encoding='utf-8'))
+        app.update()
+        app.analyze_semantic()
+        wait(app)
+        assert app.stage_tabs.select() == str(app.semantic_panel)
+        assert app.syntax_result.ok and app.semantic_result.ok
+        assert len(app.semantic_panel.identifiers.get_children()) == 5
+        assert len(app.semantic_panel.operations.get_children()) == 43
+        assert app.semantic_panel.stack.get_children()
+        exported_semantic = Path(folder) / 'semantic.json'
+        with patch('ui.app.filedialog.asksaveasfilename', return_value=str(exported_semantic)):
+            app.export()
+        assert json.loads(exported_semantic.read_text(encoding='utf-8'))['ok']
+        app.editor.set_source('dim q %\nq := 1.0\nend')
+        app.update()
+        assert app.semantic_result is None
+        app.analyze_semantic()
+        wait(app)
+        assert app.syntax_result.ok and not app.semantic_result.ok
+        app.semantic_panel.go.invoke()
+        assert app.editor.text.index('selected_token.first') == '2.0'
 
         app.editor.set_source('dim q %\nq := (1 + )\nend')
         app.update()

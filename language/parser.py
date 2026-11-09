@@ -265,8 +265,11 @@ class Parser:
         try:
             self.Op()
             while self.one_of("<>", "=", "<", "<=", ">", ">="):
+                operator = self.LEX
+                self.begin_binary(operator)
                 self.Rel()
                 self.Op()
+                self.end_binary(operator)
         except _ParseError as error:
             d = error.diagnostic
             if context and d.phase == "syntax" and d.rule == "Mn":
@@ -282,8 +285,11 @@ class Parser:
         """Op → Sl { Add Sl }."""
         self.Sl()
         while self.one_of("+", "-", "or"):
+            operator = self.LEX
+            self.begin_binary(operator)
             self.Add()
             self.Sl()
+            self.end_binary(operator)
 
     def Add(self):
         if not self.one_of("+", "-", "or"):
@@ -294,8 +300,17 @@ class Parser:
         """Sl → Mn { Mul Mn }."""
         self.Mn()
         while self.one_of("*", "/", "and"):
+            operator = self.LEX
+            self.begin_binary(operator)
             self.Mul()
             self.Mn()
+            self.end_binary(operator)
+
+    def begin_binary(self, operator):
+        pass
+
+    def end_binary(self, operator):
+        pass
 
     def Mul(self):
         if not self.one_of("*", "/", "and"):
