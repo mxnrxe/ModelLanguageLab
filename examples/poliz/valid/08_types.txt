@@ -1,0 +1,1 @@
+dim a %:dim r !:dim b $:readln a,r,b:writeln a,r,!b:end

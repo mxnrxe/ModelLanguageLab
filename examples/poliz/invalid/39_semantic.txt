@@ -1,0 +1,1 @@
+dim i %:for i := 1.0 to 3 writeln i next:end

@@ -26,7 +26,7 @@ try:
     wait(app)
     assert app.result.ok and app.syntax_result.ok
     assert app.stage_tabs.select() == str(app.syntax_panel)
-    assert len(app.stage_tabs.tabs()) == 3 and len(app.tabs.tabs()) == 3
+    assert len(app.stage_tabs.tabs()) == 4 and len(app.tabs.tabs()) == 3
     assert str(app.syntax_panel.go['state']) == 'disabled'
     text = app.editor.source()
     app.stage_tabs.select(0)
@@ -58,7 +58,7 @@ try:
         assert app.semantic_result is None
         app.analyze_semantic()
         wait(app)
-        assert app.syntax_result.ok and not app.semantic_result.ok
+        assert not app.syntax_result.ok and not app.semantic_result.ok
         app.semantic_panel.go.invoke()
         assert app.editor.text.index('selected_token.first') == '2.0'
 

@@ -57,7 +57,7 @@ class SemanticPanel(ttk.Frame):
         self.fill(self.stack, ())
 
     def render(self, result):
-        self.fill(self.identifiers, ((i.index, i.name, int(i.declared), i.type or "—", "—")
+        self.fill(self.identifiers, ((i.index, i.name, int(i.declared), i.type or "—", i.address if i.address is not None else "—")
                                     for i in result.identifiers))
         self.fill(self.stack, ((i, f"{s.line}:{s.column}", s.action, " · ".join(s.stack) or "∅")
                               for i, s in enumerate(result.trace, 1)))

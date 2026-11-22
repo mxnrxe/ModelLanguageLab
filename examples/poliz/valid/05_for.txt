@@ -1,0 +1,5 @@
+dim i,s %
+s := 0
+for i := 1 to 3 s := s + i next
+writeln s
+end

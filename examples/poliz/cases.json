@@ -1,0 +1,387 @@
+[
+  {
+    "file": "valid/01_assignment.txt",
+    "title": "Присваивание и приоритет",
+    "ok": true,
+    "inputs": [],
+    "output": [
+      "14"
+    ]
+  },
+  {
+    "file": "valid/02_if.txt",
+    "title": "Обе ветви if",
+    "ok": true,
+    "inputs": [
+      "7"
+    ],
+    "output": [
+      "10"
+    ]
+  },
+  {
+    "file": "valid/03_if_without_else.txt",
+    "title": "if без else",
+    "ok": true,
+    "inputs": [],
+    "output": [
+      "2"
+    ]
+  },
+  {
+    "file": "valid/04_while.txt",
+    "title": "while и составной оператор",
+    "ok": true,
+    "inputs": [],
+    "output": [
+      "0",
+      "1",
+      "2"
+    ]
+  },
+  {
+    "file": "valid/05_for.txt",
+    "title": "for с шагом 1",
+    "ok": true,
+    "inputs": [],
+    "output": [
+      "6"
+    ]
+  },
+  {
+    "file": "valid/06_negative_step.txt",
+    "title": "Отрицательный шаг for",
+    "ok": true,
+    "inputs": [],
+    "output": [
+      "3",
+      "2",
+      "1"
+    ]
+  },
+  {
+    "file": "valid/07_nested.txt",
+    "title": "Вложенные for",
+    "ok": true,
+    "inputs": [],
+    "output": [
+      "18"
+    ]
+  },
+  {
+    "file": "valid/08_types.txt",
+    "title": "Ввод и вывод всех типов",
+    "ok": true,
+    "inputs": [
+      "10B",
+      ".5",
+      "false"
+    ],
+    "output": [
+      "2",
+      "0.5",
+      "true"
+    ]
+  },
+  {
+    "file": "valid/09_logic.txt",
+    "title": "Отношения и логические операции",
+    "ok": true,
+    "inputs": [],
+    "output": [
+      "true",
+      "true",
+      "true",
+      "true",
+      "true",
+      "false"
+    ]
+  },
+  {
+    "file": "invalid/01_lexical.txt",
+    "title": "Недопустимый символ",
+    "ok": false,
+    "phase": "lexical",
+    "message": "Синтаксический разбор не запущен: Недопустимый символ '@'"
+  },
+  {
+    "file": "invalid/02_lexical.txt",
+    "title": "Цифра вне системы",
+    "ok": false,
+    "phase": "lexical",
+    "message": "Синтаксический разбор не запущен: Некорректная или незавершённая запись числа"
+  },
+  {
+    "file": "invalid/03_lexical.txt",
+    "title": "Нет цифр после точки",
+    "ok": false,
+    "phase": "lexical",
+    "message": "Синтаксический разбор не запущен: Некорректная или незавершённая запись числа"
+  },
+  {
+    "file": "invalid/04_lexical.txt",
+    "title": "Нет цифр порядка",
+    "ok": false,
+    "phase": "lexical",
+    "message": "Синтаксический разбор не запущен: Некорректная или незавершённая запись числа"
+  },
+  {
+    "file": "invalid/05_lexical.txt",
+    "title": "Нет суффикса hex",
+    "ok": false,
+    "phase": "lexical",
+    "message": "Синтаксический разбор не запущен: Некорректная или незавершённая запись числа"
+  },
+  {
+    "file": "invalid/06_lexical.txt",
+    "title": "Число слито с именем",
+    "ok": false,
+    "phase": "lexical",
+    "message": "Синтаксический разбор не запущен: Некорректная или незавершённая запись числа"
+  },
+  {
+    "file": "invalid/07_lexical.txt",
+    "title": "Незакрытый комментарий",
+    "ok": false,
+    "phase": "lexical",
+    "message": "Синтаксический разбор не запущен: Незавершённый комментарий: ожидается }"
+  },
+  {
+    "file": "invalid/08_syntax.txt",
+    "title": "Пустая программа",
+    "ok": false,
+    "phase": "syntax",
+    "message": "Ожидалось: «идентификатор», «[», «if», «for», «while», «readln», «writeln». Получено: «end»."
+  },
+  {
+    "file": "invalid/09_syntax.txt",
+    "title": "Нет завершающего end",
+    "ok": false,
+    "phase": "syntax",
+    "message": "Ожидалось: «end». Получено: «конец файла»."
+  },
+  {
+    "file": "invalid/10_syntax.txt",
+    "title": "Лексемы после end",
+    "ok": false,
+    "phase": "syntax",
+    "message": "После end не должно быть лексем, включая /n."
+  },
+  {
+    "file": "invalid/11_syntax.txt",
+    "title": "Нет разделителя",
+    "ok": false,
+    "phase": "syntax",
+    "message": "Ожидалось: «:», «/n». Получено: «writeln»."
+  },
+  {
+    "file": "invalid/12_syntax.txt",
+    "title": "Пустая строка",
+    "ok": false,
+    "phase": "syntax",
+    "message": "Ожидалось: «идентификатор», «[», «if», «for», «while», «readln», «writeln». Получено: «/n»."
+  },
+  {
+    "file": "invalid/13_syntax.txt",
+    "title": "Нет имени в объявлении",
+    "ok": false,
+    "phase": "syntax",
+    "message": "Ожидалось: «идентификатор». Получено: «%»."
+  },
+  {
+    "file": "invalid/14_syntax.txt",
+    "title": "Нет типа",
+    "ok": false,
+    "phase": "syntax",
+    "message": "Ожидалось: «%», «!», «$». Получено: «:»."
+  },
+  {
+    "file": "invalid/15_syntax.txt",
+    "title": "Нет знака присваивания",
+    "ok": false,
+    "phase": "syntax",
+    "message": "Ожидалось: «:=». Получено: «=»."
+  },
+  {
+    "file": "invalid/16_syntax.txt",
+    "title": "Нет операнда",
+    "ok": false,
+    "phase": "syntax",
+    "message": "После «:=» ожидается выражение для присваивания. После оператора «+» ожидается операнд (идентификатор, число, true, false, ! или выражение в скобках)."
+  },
+  {
+    "file": "invalid/17_syntax.txt",
+    "title": "Не закрыта скобка",
+    "ok": false,
+    "phase": "syntax",
+    "message": "После writeln требуется выражение. Не закрыта скобка «(», открытая в строке 1, столбце 9. Ожидалась «)»."
+  },
+  {
+    "file": "invalid/18_syntax.txt",
+    "title": "Пустой блок",
+    "ok": false,
+    "phase": "syntax",
+    "message": "После «[» требуется оператор; пустой блок недопустим. Получено: «]»."
+  },
+  {
+    "file": "invalid/19_syntax.txt",
+    "title": "Разделитель перед ]",
+    "ok": false,
+    "phase": "syntax",
+    "message": "Разделитель перед «]» недопустим; после разделителя требуется оператор. Получено: «]»."
+  },
+  {
+    "file": "invalid/20_syntax.txt",
+    "title": "Нет тела if",
+    "ok": false,
+    "phase": "syntax",
+    "message": "После условия «if» требуется оператор его тела. Получено: «else»."
+  },
+  {
+    "file": "invalid/21_syntax.txt",
+    "title": "Нет тела else",
+    "ok": false,
+    "phase": "syntax",
+    "message": "После «else» требуется оператор его ветви. Получено: «:»."
+  },
+  {
+    "file": "invalid/22_syntax.txt",
+    "title": "Нет to",
+    "ok": false,
+    "phase": "syntax",
+    "message": "Ожидалось: «to». Получено: «3»."
+  },
+  {
+    "file": "invalid/23_syntax.txt",
+    "title": "Нет next",
+    "ok": false,
+    "phase": "syntax",
+    "message": "Ожидалось: «next». Получено: «:»."
+  },
+  {
+    "file": "invalid/24_syntax.txt",
+    "title": "Нет шага после step",
+    "ok": false,
+    "phase": "syntax",
+    "message": "После «step» пропущено выражение шага перед присваиванием «i :=». Укажите шаг, например: «step 1 i := ...»; шагом также может быть идентификатор или составное выражение."
+  },
+  {
+    "file": "invalid/25_syntax.txt",
+    "title": "Нет скобок while",
+    "ok": false,
+    "phase": "syntax",
+    "message": "После «while» требуется условие в круглых скобках: «( ... )»."
+  },
+  {
+    "file": "invalid/26_syntax.txt",
+    "title": "Нет имени ввода",
+    "ok": false,
+    "phase": "syntax",
+    "message": "Ожидалось: «идентификатор». Получено: «:»."
+  },
+  {
+    "file": "invalid/27_syntax.txt",
+    "title": "Нет выражения вывода",
+    "ok": false,
+    "phase": "syntax",
+    "message": "После writeln требуется выражение. Ожидалось: «идентификатор», «число», «true», «false», «!», «(». Получено: «:»."
+  },
+  {
+    "file": "invalid/28_semantic.txt",
+    "title": "Повтор в объявлении",
+    "ok": false,
+    "phase": "semantic",
+    "message": "Повторное объявление «a»."
+  },
+  {
+    "file": "invalid/29_semantic.txt",
+    "title": "Повторное объявление",
+    "ok": false,
+    "phase": "semantic",
+    "message": "Повторное объявление «a»."
+  },
+  {
+    "file": "invalid/30_semantic.txt",
+    "title": "Необъявленная цель",
+    "ok": false,
+    "phase": "semantic",
+    "message": "Идентификатор «a» не объявлен к месту использования."
+  },
+  {
+    "file": "invalid/31_semantic.txt",
+    "title": "Необъявленный операнд",
+    "ok": false,
+    "phase": "semantic",
+    "message": "Идентификатор «a» не объявлен к месту использования."
+  },
+  {
+    "file": "invalid/32_semantic.txt",
+    "title": "Необъявленное имя ввода",
+    "ok": false,
+    "phase": "semantic",
+    "message": "Идентификатор «a» не объявлен к месту использования."
+  },
+  {
+    "file": "invalid/33_semantic.txt",
+    "title": "Несовместимое присваивание",
+    "ok": false,
+    "phase": "semantic",
+    "message": "Присваивание: нужен тип integer, получен real."
+  },
+  {
+    "file": "invalid/34_semantic.txt",
+    "title": "Несовместимые операнды",
+    "ok": false,
+    "phase": "semantic",
+    "message": "Операция «+» недопустима для boolean и integer."
+  },
+  {
+    "file": "invalid/35_semantic.txt",
+    "title": "Нелогическое отрицание",
+    "ok": false,
+    "phase": "semantic",
+    "message": "Операция !: нужен тип boolean, получен integer."
+  },
+  {
+    "file": "invalid/36_semantic.txt",
+    "title": "Нелогическое условие if",
+    "ok": false,
+    "phase": "semantic",
+    "message": "Условие: нужен тип boolean, получен integer."
+  },
+  {
+    "file": "invalid/37_semantic.txt",
+    "title": "Нелогическое условие while",
+    "ok": false,
+    "phase": "semantic",
+    "message": "Условие: нужен тип boolean, получен integer."
+  },
+  {
+    "file": "invalid/38_semantic.txt",
+    "title": "Вещественный счётчик",
+    "ok": false,
+    "phase": "semantic",
+    "message": "Счётчик for: нужен тип integer, получен real."
+  },
+  {
+    "file": "invalid/39_semantic.txt",
+    "title": "Вещественное начало",
+    "ok": false,
+    "phase": "semantic",
+    "message": "Начальное значение for: нужен тип integer, получен real."
+  },
+  {
+    "file": "invalid/40_semantic.txt",
+    "title": "Вещественная граница",
+    "ok": false,
+    "phase": "semantic",
+    "message": "Граница for: нужен тип integer, получен real."
+  },
+  {
+    "file": "invalid/41_semantic.txt",
+    "title": "Вещественный шаг",
+    "ok": false,
+    "phase": "semantic",
+    "message": "Шаг for: нужен тип integer, получен real."
+  }
+]

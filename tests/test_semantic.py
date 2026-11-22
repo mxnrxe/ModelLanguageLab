@@ -83,7 +83,7 @@ class SemanticTests(unittest.TestCase):
     def test_phase_gate_and_reuse(self):
         a = SemanticAnalyzer()
         for source, phase in (("x := 8O:end", "lexical"),
-                              ("x := 1 + :end", "syntax"),
+                              ("dim x %:x := 1 + :end", "syntax"),
                               ("x := 1:end", "semantic")):
             r = a.analyze(Lexer().analyze(source))
             self.assertEqual(r.diagnostics[0].phase, phase)

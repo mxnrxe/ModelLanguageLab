@@ -9,6 +9,9 @@ from tkinter import ttk, filedialog, messagebox
 from language.lexer import Lexer
 from language.parser import Parser
 from language.semantic import SemanticAnalyzer, TOP
+from language.poliz import Compiler
+from language.interpreter import Interpreter
+from .poliz_panel import PolizPanel
 from language.tables import TW, TL
 from language.numbers import display_value
 from .editor import CodeEditor
@@ -40,6 +43,9 @@ class LabApp(tk.Tk):
         self.result = None
         self.syntax_result = None
         self.semantic_result = None
+        self.compilation = None
+        self.execution = None
+        self.executing = False
         self.version = 0
         self.busy = False
         self.messages = queue.Queue()
@@ -54,6 +60,8 @@ class LabApp(tk.Tk):
         self.bind("<F5>", lambda _: self.analyze())
         self.bind("<F6>", lambda _: self.analyze_syntax())
         self.bind("<F7>", lambda _: self.analyze_semantic())
+        self.bind("<F8>", lambda _: self.analyze_poliz())
+        self.bind("<F9>", lambda _: self.run_poliz())
         self.protocol("WM_DELETE_WINDOW", self.close)
         self.after(100, self._poll)
 
@@ -140,6 +148,8 @@ class LabApp(tk.Tk):
         self.semantic_button = ttk.Button(actions, text="Семантика  F7",
                                           command=self.analyze_semantic)
         self.semantic_button.pack(side="left", padx=(6, 0))
+        self.poliz_button = ttk.Button(actions, text="ПОЛИЗ F8", command=self.analyze_poliz)
+        self.poliz_button.pack(side="left", padx=4)
         self.stage_tabs = ttk.Notebook(right)
         self.stage_tabs.pack(fill="both", expand=True, padx=(8, 0))
         lexical_page = ttk.Frame(self.stage_tabs)
@@ -148,6 +158,8 @@ class LabApp(tk.Tk):
         self.stage_tabs.add(self.syntax_panel, text="Синтаксический анализ")
         self.semantic_panel = SemanticPanel(self.stage_tabs, self.show_error)
         self.stage_tabs.add(self.semantic_panel, text="Семантика")
+        self.poliz_panel = PolizPanel(self.stage_tabs, self.run_poliz, self.show_error)
+        self.stage_tabs.add(self.poliz_panel, text="ПОЛИЗ и выполнение")
         self.tabs = ttk.Notebook(lexical_page)
         self.tabs.pack(fill="both", expand=True)
         overview = ttk.Frame(self.tabs)
@@ -223,6 +235,9 @@ class LabApp(tk.Tk):
 
     def changed(self):
         self.version += 1
+        self.compilation = None
+        self.execution = None
+        self.poliz_panel.reset()
         if self.semantic_result is not None:
             self.semantic_result = None
             self.semantic_panel.reset(stale=True)
@@ -306,9 +321,20 @@ class LabApp(tk.Tk):
                 target.add_command(label=case.get("title") or case["issue"],
                                    command=lambda p=path: self.load_path(p))
             menu.add_cascade(label=title, menu=submenu)
+        catalog = json.loads((ROOT / 'examples/poliz/cases.json').read_text(encoding='utf-8'))
+        for valid, title in ((True, 'ЛР5 - перевод и выполнение'), (False, 'ЛР5 - контроль ошибок')):
+            submenu = tk.Menu(menu, tearoff=False)
+            for case in catalog:
+                if case['ok'] == valid:
+                    path = ROOT / 'examples/poliz' / case['file']
+                    submenu.add_command(label=case['title'], command=lambda p=path: self.load_path(p))
+            menu.add_cascade(label=title, menu=submenu)
         menu.tk_popup(self.winfo_pointerx(), self.winfo_pointery())
 
     def clear_result(self):
+        self.compilation = None
+        self.execution = None
+        self.poliz_panel.reset()
         self.result = None
         self.syntax_result = None
         self.syntax_panel.reset()
@@ -329,20 +355,25 @@ class LabApp(tk.Tk):
     def analyze_semantic(self):
         self._start_analysis(True, semantic=True)
 
-    def _start_analysis(self, syntax, semantic=False):
+    def analyze_poliz(self):
+        self._start_analysis(True, semantic=True, poliz=True)
+
+    def _start_analysis(self, syntax, semantic=False, poliz=False):
         if self.busy: return
         source, version = self.editor.source(), self.version
         self.busy = True
         self.run_button.configure(state="disabled")
         self.syntax_button.configure(state="disabled")
         self.semantic_button.configure(state="disabled")
-        self.stage_tabs.select(self.semantic_panel if semantic else self.syntax_panel if syntax else 0)
+        self.poliz_button.configure(state="disabled")
+        self.poliz_panel.run_button.configure(state="disabled")
+        self.stage_tabs.select(self.poliz_panel if poliz else self.semantic_panel if semantic else self.syntax_panel if syntax else 0)
         self.status.set("Анализирую программу…")
         def worker():
             try:
                 lexical = Lexer().analyze(source)
-                parsed = Parser().analyze(lexical) if syntax else None
-                checked = SemanticAnalyzer().analyze(lexical, syntax=parsed) if semantic else None
+                checked = Compiler().analyze(lexical) if syntax else None
+                parsed = checked
                 self.messages.put((version, lexical, parsed, checked, None))
             except Exception as error: self.messages.put((version, None, None, None, error))
         threading.Thread(target=worker, daemon=True).start()
@@ -354,6 +385,7 @@ class LabApp(tk.Tk):
             self.run_button.configure(state="normal")
             self.syntax_button.configure(state="normal")
             self.semantic_button.configure(state="normal")
+            self.poliz_button.configure(state="normal")
             if version != self.version:
                 self.status.set("Текст изменился во время анализа. Запустите проверку ещё раз.")
             elif error:
@@ -372,6 +404,8 @@ class LabApp(tk.Tk):
                         self.editor.text.see(f"1.0+{d.start}c")
                         self.status.set(f"Ошибка {d.line}:{d.column} · {d.message} · нажмите для перехода")
                 if checked is not None:
+                    self.compilation = checked
+                    self.poliz_panel.render(checked)
                     self.semantic_result = checked
                     self.semantic_panel.render(checked)
                     if checked.ok:
@@ -432,7 +466,13 @@ class LabApp(tk.Tk):
             self.editor.text.see(f"{step.line}.{step.column - 1}")
 
     def show_error(self):
-        if (self._fresh() and self.stage_tabs.select() == str(self.semantic_panel)
+        if (self._fresh() and self.stage_tabs.select() == str(self.poliz_panel)
+                and self.execution and not self.execution.ok and self.compilation):
+            item = self.compilation.code[self.execution.pc - 1]
+            self.editor.text.see(f'{item.line}.{item.column - 1}')
+            self.editor.text.focus_set()
+            return
+        if (self._fresh() and self.stage_tabs.select() in (str(self.semantic_panel), str(self.poliz_panel))
                 and self.semantic_result and self.semantic_result.diagnostics):
             d = self.semantic_result.diagnostics[0]
             self.editor.select_span(d.start, d.end)
@@ -465,6 +505,20 @@ class LabApp(tk.Tk):
             messagebox.showinfo("Экспорт", "Сначала выполните анализ текущего текста (F5).", parent=self)
             return
         syntax = self.stage_tabs.select() == str(self.syntax_panel)
+        if self.stage_tabs.select() == str(self.poliz_panel):
+            if self.compilation is None:
+                messagebox.showinfo("Экспорт", "Сначала выполните трансляцию F8.", parent=self)
+                return
+            name = filedialog.asksaveasfilename(parent=self, defaultextension='.json',
+                                               filetypes=[('Результат JSON', '*.json')])
+            if name:
+                data = {'compilation': asdict(self.compilation),
+                        'execution': asdict(self.execution) if self.execution else None}
+                try:
+                    Path(name).write_text(json.dumps(data, ensure_ascii=False, indent=2, default=str), encoding='utf-8')
+                except OSError as error:
+                    messagebox.showerror('Экспорт', str(error), parent=self)
+            return
         if self.stage_tabs.select() == str(self.semantic_panel):
             self.export_semantic()
             return
@@ -506,9 +560,38 @@ class LabApp(tk.Tk):
             data = {**asdict(r), "phase": "semantic", "ok": r.ok,
                     "TOP": [(*key, value) for key, value in TOP.items()]}
             try:
-                Path(name).write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+                Path(name).write_text(json.dumps(data, ensure_ascii=False, indent=2, default=str), encoding="utf-8")
             except OSError as error:
                 messagebox.showerror("Экспорт", str(error), parent=self)
+
+    def run_poliz(self):
+        if self.busy or self.executing:
+            return
+        if not self._fresh() or self.compilation is None or not self.compilation.ok:
+            self.status.set('Сначала выполните успешную трансляцию F8.')
+            return
+        self.executing = True
+        version, program = self.version, self.compilation
+        inputs = self.poliz_panel.input_values()
+        self.poliz_panel.run_button.configure(state='disabled')
+        def worker():
+            self.run_messages.put((version, Interpreter().run(program, inputs)))
+        self.run_messages = queue.Queue()
+        threading.Thread(target=worker, daemon=True).start()
+        self.after(50, self._poll_execution)
+
+    def _poll_execution(self):
+        try:
+            version, result = self.run_messages.get_nowait()
+        except queue.Empty:
+            self.after(50, self._poll_execution)
+            return
+        self.executing = False
+        if version == self.version and self._fresh() and self.compilation is not None:
+            self.execution = result
+            self.poliz_panel.render_execution(result)
+            self.status.set('✓ Выполнение завершено' if result.ok else result.error)
+            self.poliz_panel.run_button.configure(state='normal')
 
     def close(self):
         if self._confirm_replace(): self.destroy()

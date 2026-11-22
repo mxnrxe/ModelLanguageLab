@@ -1,0 +1,1 @@
+dim a % writeln a:end

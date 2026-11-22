@@ -80,6 +80,12 @@ class SyntaxPanel(ttk.Frame):
                        "Вся цепочка разобрана от Pr до завершающего end. Лишних лексем нет.")
             return
         d = result.diagnostics[0]
+        if d.phase == 'semantic':
+            self.heading.configure(text='Разбор остановлен', foreground='#b64254')
+            self.summary.configure(text=f'Семантическая ошибка {d.line}:{d.column}. Оставшаяся часть программы не проверена.')
+            self.go.configure(state='normal')
+            self.write(d.message)
+            return
         lexical = d.phase == "lexical"
         limit = d.phase == "limit"
         title = "Предел анализатора" if limit else "Ошибка лексики" if lexical else "Ошибка синтаксиса"

@@ -1,0 +1,4 @@
+dim a %
+readln a
+if (a > 5) writeln a + 3 else writeln a
+end

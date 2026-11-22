@@ -43,6 +43,8 @@ class SemanticResult:
     diagnostics: list[SyntaxDiagnostic] = field(default_factory=list)
     trace: list[StackStep] = field(default_factory=list)
     trace_truncated: bool = False
+    consumed: int = 0
+    total: int = 0
 
     @property
     def ok(self):
@@ -57,22 +59,24 @@ class SemanticAnalyzer(Parser):
     """Семантические действия при рекурсивном спуске по готовым лексемам."""
 
     def analyze(self, lexical, *, syntax=None, trace=True):
-        syntax = Parser().analyze(lexical) if syntax is None else syntax
         self.result = SemanticResult(
             [Identifier(i, name) for i, name in enumerate(lexical.identifiers, 1)],
-            list(syntax.diagnostics),
+            total=len(lexical.tokens),
         )
         self.stack = []
         self.declaration_stack = []
         self.declaration_tokens = []
         self.declaring = False
         self.trace_enabled = trace
-        if not syntax.ok:
+        if syntax is not None and not syntax.ok:
+            self.result.diagnostics.extend(syntax.diagnostics)
             return self.result
         try:
-            super().analyze(lexical)
+            parsed = super().analyze(lexical)
+            self.result.diagnostics.extend(parsed.diagnostics)
         except _SemanticError:
             pass
+        self.result.consumed = self.position
         return self.result
 
     def fail(self, token, rule, message, expected=(), found=None):
@@ -220,10 +224,12 @@ class SemanticAnalyzer(Parser):
         self.assignment()
 
     def condition(self, rule):
-        self.take("(", rule)
+        opening = self.LEX
+        word = 'if' if rule == 'Cond' else 'while'
+        self.take("(", rule, f"После «{word}» требуется условие в круглых скобках: «( ... )».")
         start = self.LEX
-        self.Ex()
-        self.take(")", rule)
+        self.Ex(f"В скобках после «{word}» ожидается выражение условия")
+        self.take(")", rule, self.missing_close(')', opening))
         self.eqbool(start, rule)
 
     def eqbool(self, start, rule):
@@ -232,19 +238,25 @@ class SemanticAnalyzer(Parser):
     def Cond(self):
         self.take("if", "Cond")
         self.condition("Cond")
-        self.St()
+        self.statement("После условия «if» требуется оператор его тела")
         if self.EQ("else"):
             self.gl()
-            self.St()
+            self.statement("После «else» требуется оператор его ветви")
 
     def WhileSt(self):
         self.take("while", "WhileSt")
         self.condition("WhileSt")
-        self.St()
+        self.statement("После условия «while» требуется оператор тела цикла")
 
     def for_expression(self, context):
         start = self.LEX
-        self.Ex()
+        position = self.position
+        self.Ex(f"{context}: ожидается выражение")
+        if context == 'Шаг for' and self.position == position + 1 and start.table == 3 and self.EQ(':='):
+            self.error('St', 'выражение шага после step', token=start,
+                message=(f'После «step» пропущено выражение шага перед присваиванием «{start.text} :=». '
+                         f'Укажите шаг, например: «step 1 {start.text} := ...»; '
+                         'шагом также может быть идентификатор или составное выражение.'))
         self.require(start, self.take_type(start, context), INT, "ForSt", context)
 
     def ForSt(self):
@@ -255,7 +267,7 @@ class SemanticAnalyzer(Parser):
         if self.EQ("step"):
             self.gl()
             self.for_expression("Шаг for")
-        self.St()
+        self.statement("В цикле «for» после границы и шага требуется оператор тела")
         self.take("next", "ForSt")
 
     def ExL(self):
