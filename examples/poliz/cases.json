@@ -98,6 +98,35 @@
     ]
   },
   {
+    "file": "valid/10_while_if_input.txt",
+    "title": "Практика: while, if, ввод внутри условия",
+    "ok": true,
+    "inputs": [
+      "10"
+    ],
+    "output": [
+      "1",
+      "20",
+      "3"
+    ]
+  },
+  {
+    "file": "valid/11_for_if_input.txt",
+    "title": "Практика: for, ввод и сумма положительных",
+    "ok": true,
+    "inputs": [
+      "5",
+      "-2",
+      "7"
+    ],
+    "output": [
+      "5",
+      "0",
+      "7",
+      "12"
+    ]
+  },
+  {
     "file": "invalid/01_lexical.txt",
     "title": "Недопустимый символ",
     "ok": false,

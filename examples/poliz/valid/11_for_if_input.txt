@@ -1,0 +1,6 @@
+dim i,x,s %
+s := 0
+for i := 1 to 3 [readln x
+if (x > 0) [s := s + x:writeln x] else writeln 0] next
+writeln s
+end

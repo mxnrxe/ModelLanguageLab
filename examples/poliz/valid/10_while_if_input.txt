@@ -1,0 +1,5 @@
+dim i,x %
+i := 1
+while (i <= 3) [if (i = 2) [readln x:writeln x * 2] else writeln i
+i := i + 1]
+end
